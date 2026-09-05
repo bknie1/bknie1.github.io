@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brandon Knieriem</title>
+<style>
+  :root {
+    --bg: #161513;
+    --ink: #e8e6e1;
+    --muted: #98968f;
+    --card: #201f1c;
+    --edge: #34322d;
+    --accent: #e0764a;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f7f6f3;
+      --ink: #1c1c1a;
+      --muted: #6b6a66;
+      --card: #ffffff;
+      --edge: #e3e1dc;
+      --accent: #b3552e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 2rem 1.25rem;
+  }
+  main { max-width: 32rem; width: 100%; }
+  h1 { font-size: 1.8rem; margin: 0 0 0.25rem; letter-spacing: -0.02em; }
+  p.lead { color: var(--muted); margin: 0 0 2rem; }
+  .projects { display: flex; flex-direction: column; gap: 0.9rem; }
+  a.project {
+    display: block;
+    padding: 1rem 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--edge);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+  }
+  a.project:hover { border-color: var(--accent); }
+  a.project .name { font-weight: 700; color: var(--accent); }
+  a.project .desc { color: var(--muted); font-size: 0.92rem; margin-top: 0.2rem; }
+  footer { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Brandon Knieriem</h1>
+  <p class="lead">Personal projects, live and in progress.</p>
+  <div class="projects">
+    <a class="project" href="https://bknie1.github.io/True-Audio-Normalizer/">
+      <div class="name">TAN - True Audio Normalizer</div>
+      <div class="desc">Real-time, cross-platform audio normalization for poorly mixed sound. Open source, no metadata cheats.</div>
+    </a>
+    <a class="project" href="https://bknie1.github.io/PRISM/">
+      <div class="name">PRISM</div>
+      <div class="desc">A universal image format: lossless raster, defined reconstruction, binary vector payloads.</div>
+    </a>
+    <a class="project" href="https://bknie1.github.io/everquest-maps/">
+      <div class="name">EverQuest Maps</div>
+      <div class="desc">Vector-drawn maps for a really old game.</div>
+    </a>
+  </div>
+  <footer>
+    <a href="https://github.com/bknie1">github.com/bknie1</a>
+  </footer>
+</main>
+</body>
+</html>
