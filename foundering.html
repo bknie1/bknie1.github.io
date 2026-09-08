@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foundering</title>
+<style>
+  :root {
+    --bg: #10131a;
+    --ink: #e8e6e1;
+    --muted: #98a0ad;
+    --card: #171b24;
+    --edge: #2a303c;
+    --accent: #4aa3e0;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f6fa;
+      --ink: #1a1d23;
+      --muted: #5c636f;
+      --card: #ffffff;
+      --edge: #dfe3ea;
+      --accent: #2e6ea8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg); color: var(--ink);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 2.5rem 1.25rem;
+  }
+  main { max-width: 36rem; width: 100%; }
+  .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.72rem; margin: 0 0 0.4rem; }
+  h1 { font-size: 2.4rem; margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+  p.lead { color: var(--muted); margin: 0 0 1.6rem; font-size: 1.05rem; }
+  p { margin: 0 0 1.1rem; }
+  h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 1.8rem 0 0.7rem; }
+  ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  li { padding: 0.7rem 0.9rem; background: var(--card); border: 1px solid var(--edge); border-radius: 10px; font-size: 0.94rem; }
+  li b { color: var(--accent); }
+  .cta { display: inline-block; margin-top: 1.8rem; padding: 0.7rem 1.2rem; background: var(--accent); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 700; }
+  .note { color: var(--muted); font-size: 0.82rem; margin-top: 0.8rem; }
+  footer { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
+  footer a, .backlink { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Prototype &middot; Godot 4 / C#</p>
+  <h1>Foundering</h1>
+  <p class="lead">A roguelite escape from a sinking ocean liner. Start deep in the flooding
+  hull and climb your way up and out &mdash; before the water, the pressure behind the
+  watertight doors, and the ship itself finish you.</p>
+
+  <p>You play a third-class passenger aboard a <em>foundering</em> liner. Every ship is
+  procedurally generated from a seed and verified solvable, then assembled from real areas
+  of the ship &mdash; boiler rooms and steerage down low, second class in the middle, the
+  grand staircase and boat deck up top. Flee upward, seal hatches behind you, and reach
+  the boats.</p>
+
+  <h2>What's in it</h2>
+  <ul>
+    <li><b>A real flooding simulation</b> &mdash; water flows through open hatches, backs
+    up deck to deck, and builds pressure behind sealed doors until they burst.</li>
+    <li><b>Watertight doors &amp; hold-breath swimming</b> &mdash; seal the way behind you,
+    or take a breath and swim a flooded compartment for the key.</li>
+    <li><b>Emergency pumps &amp; power</b> &mdash; restore power, run the pumps, buy time.</li>
+    <li><b>Seeded, always-solvable levels</b> &mdash; a graph check guarantees a route out.</li>
+    <li><b>Passenger rescues &amp; an Educational mode</b> &mdash; save who you can and learn
+    the real history of each area as you pass through it.</li>
+  </ul>
+
+  <a class="cta" href="https://github.com/bknie1/Foundering">View the code &rarr;</a>
+  <p class="note">Early prototype, in active development. The repository may be private while
+  it's early.</p>
+
+  <footer><a class="backlink" href="./">&larr; back to bknie1</a></footer>
+</main>
+</body>
+</html>
