@@ -6,53 +6,88 @@
 <title>Brandon Knieriem</title>
 <style>
   :root {
-    --bg: #161513;
-    --ink: #e8e6e1;
-    --muted: #98968f;
-    --card: #201f1c;
-    --edge: #34322d;
-    --accent: #e0764a;
+    /* dark, evergreen-adjacent */
+    --bg: #161a17;
+    --bg-alt: #1d2320;
+    --ink: #eae7e1;
+    --muted: #9ba39c;
+    --card: #202521;
+    --edge: #333a33;
+    --accent: #d98f6c;
+    --accent-2: #93a08f;
+    --accent-2-deep: #b9c2b2;
+    --sage: #8b9388;
+    --sage-soft: #4b5249;
+    --blush: #4a4038;
   }
   @media (prefers-color-scheme: light) {
     :root {
-      --bg: #f7f6f3;
-      --ink: #1c1c1a;
-      --muted: #6b6a66;
+      /* the earthy sage palette from Brandon's resume */
+      --bg: #f4f3f1;
+      --bg-alt: #f7f2eb;
+      --ink: #2e322f;
+      --muted: #767c77;
       --card: #ffffff;
-      --edge: #e3e1dc;
-      --accent: #b3552e;
+      --edge: #e0ded9;
+      --accent: #b57b66;
+      --accent-2: #68756d;
+      --accent-2-deep: #4c574f;
+      --sage: #a1a79e;
+      --sage-soft: #cbcfc8;
+      --blush: #decebf;
     }
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: var(--bg);
     color: var(--ink);
     font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-    padding: 2rem 1.25rem;
+    padding: 3rem 1.25rem 2.5rem;
   }
-  main { max-width: 32rem; width: 100%; }
-  h1 { font-size: 1.8rem; margin: 0 0 0.25rem; letter-spacing: -0.02em; }
-  p.lead { color: var(--muted); margin: 0 0 2rem; }
+  main { max-width: 62rem; width: 100%; margin: 0 auto; }
+  h1 { font-size: 2rem; margin: 0 0 0.3rem; letter-spacing: -0.02em; }
+  p.lead { color: var(--muted); margin: 0 0 2.25rem; max-width: 38rem; }
   p.lead a { color: var(--accent); }
-  .projects { display: flex; flex-direction: column; gap: 0.9rem; }
-  a.project {
-    display: block;
-    padding: 1rem 1.25rem;
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  a.card {
+    display: flex;
+    flex-direction: column;
     background: var(--card);
     border: 1px solid var(--edge);
-    border-radius: 12px;
+    border-radius: 14px;
     text-decoration: none;
     color: inherit;
+    overflow: hidden;
+    transition: border-color 0.15s ease, transform 0.15s ease;
   }
-  a.project:hover { border-color: var(--accent); }
-  a.project .name { font-weight: 700; color: var(--accent); }
-  a.project .desc { color: var(--muted); font-size: 0.92rem; margin-top: 0.2rem; }
-  footer { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
+  a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card-banner {
+    aspect-ratio: 16 / 8;
+    background: var(--bg-alt);
+    display: block;
+    overflow: hidden;
+  }
+  .card-banner svg, .card-banner img {
+    width: 100%; height: 100%; display: block; object-fit: cover;
+  }
+  .card-body { padding: 1rem 1.15rem 1.15rem; display: flex; flex-direction: column; flex: 1; }
+  .card .name { font-weight: 700; color: var(--accent); font-size: 1.02rem; }
+  .card .desc { color: var(--muted); font-size: 0.88rem; margin-top: 0.35rem; flex: 1; }
+  .card .tags { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .card .tag {
+    font-size: 0.7rem; color: var(--accent-2-deep); background: var(--bg-alt);
+    border: 1px solid var(--edge); border-radius: 999px; padding: 0.15rem 0.55rem;
+  }
+
+  p.footnote { color: var(--muted); margin-top: 2.5rem; }
+  footer { margin-top: 1.5rem; color: var(--muted); font-size: 0.85rem; }
   footer a { color: inherit; }
 </style>
 </head>
@@ -60,29 +95,118 @@
 <main>
   <h1>Brandon Knieriem</h1>
   <p class="lead">Personal projects, live and in progress.</p>
+
   <div class="projects">
-    <a class="project" href="foundering.html">
-      <div class="name">Foundering</div>
-      <div class="desc">A survival-horror roguelite escape from a sinking ocean liner &mdash; a real flooding sim, a wired ship of power circuits, eight classes, seven storytellers, and branching, seeded ships. Windows, macOS &amp; Linux alpha available.</div>
+
+    <a class="card" href="foundering.html">
+      <span class="card-banner">
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a ship hull with a flooded lower deck">
+          <rect x="24" y="18" width="272" height="116" rx="14" fill="var(--card)" stroke="var(--sage)" stroke-width="2"/>
+          <line x1="24" y1="56" x2="296" y2="56" stroke="var(--edge)" stroke-width="2"/>
+          <line x1="24" y1="94" x2="296" y2="94" stroke="var(--edge)" stroke-width="2"/>
+          <path d="M24 94 Q60 86 96 94 T168 94 T240 94 T296 94 V134 H24 Z" fill="var(--accent-2)" opacity="0.4"/>
+          <g fill="var(--accent)">
+            <circle cx="60" cy="37" r="6"/><circle cx="100" cy="37" r="6"/><circle cx="140" cy="37" r="6"/>
+            <circle cx="180" cy="37" r="6"/><circle cx="220" cy="37" r="6"/><circle cx="260" cy="37" r="6"/>
+          </g>
+          <g fill="var(--accent-2-deep)" opacity="0.55">
+            <circle cx="60" cy="75" r="6"/><circle cx="100" cy="75" r="6"/><circle cx="140" cy="75" r="6"/>
+            <circle cx="180" cy="75" r="6"/><circle cx="220" cy="75" r="6"/><circle cx="260" cy="75" r="6"/>
+          </g>
+          <g fill="var(--sage-soft)" opacity="0.8">
+            <circle cx="60" cy="113" r="6"/><circle cx="100" cy="113" r="6"/><circle cx="140" cy="113" r="6"/>
+            <circle cx="180" cy="113" r="6"/><circle cx="220" cy="113" r="6"/><circle cx="260" cy="113" r="6"/>
+          </g>
+        </svg>
+      </span>
+      <span class="card-body">
+        <span class="name">Foundering</span>
+        <span class="desc">A survival-horror roguelite escape from a sinking ocean liner &mdash; a real flooding sim, a wired ship of power circuits, eight classes, seven storytellers, and branching, seeded ships across 453 modeled rooms.</span>
+        <span class="tags"><span class="tag">Godot 4</span><span class="tag">C#</span></span>
+      </span>
     </a>
-    <a class="project" href="https://bknie1.github.io/True-Audio-Normalizer/">
-      <div class="name">TAN - True Audio Normalizer</div>
-      <div class="desc">Real-time, cross-platform audio normalization for poorly mixed sound. Open source, no metadata cheats.</div>
+
+    <a class="card" href="https://bknie1.github.io/True-Audio-Normalizer/">
+      <span class="card-banner">
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Uneven audio bars on the left evening out to a normalized level on the right">
+          <line x1="20" y1="65" x2="300" y2="65" stroke="var(--edge)" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <g fill="var(--muted)" opacity="0.85">
+            <rect x="30" y="100" width="16" height="30" rx="3"/>
+            <rect x="56" y="60" width="16" height="70" rx="3"/>
+            <rect x="82" y="115" width="16" height="15" rx="3"/>
+            <rect x="108" y="40" width="16" height="90" rx="3"/>
+            <rect x="134" y="90" width="16" height="40" rx="3"/>
+          </g>
+          <g fill="var(--accent)">
+            <rect x="174" y="65" width="16" height="65" rx="3"/>
+            <rect x="200" y="65" width="16" height="65" rx="3"/>
+            <rect x="226" y="65" width="16" height="65" rx="3"/>
+            <rect x="252" y="65" width="16" height="65" rx="3"/>
+            <rect x="278" y="65" width="16" height="65" rx="3"/>
+          </g>
+        </svg>
+      </span>
+      <span class="card-body">
+        <span class="name">TAN &mdash; True Audio Normalizer</span>
+        <span class="desc">Real-time, cross-platform audio normalization for poorly mixed sound. Works blind, with no loudness metadata and no licensed decoder. Open source, no metadata cheats.</span>
+        <span class="tags"><span class="tag">Rust</span><span class="tag">WebAssembly</span></span>
+      </span>
     </a>
-    <a class="project" href="https://bknie1.github.io/PRISM/">
-      <div class="name">PRISM</div>
-      <div class="desc">A universal image format: lossless raster, defined reconstruction, binary vector payloads.</div>
+
+    <a class="card" href="https://bknie1.github.io/PRISM/">
+      <span class="card-banner">
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A beam of light entering a prism and splitting into three colored beams">
+          <line x1="20" y1="85" x2="118" y2="85" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>
+          <polygon points="150,35 108,130 192,130" fill="var(--sage)" stroke="var(--accent-2-deep)" stroke-width="2"/>
+          <path d="M162 92 L286 55" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M168 96 L292 96" stroke="var(--accent-2)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M162 100 L286 137" stroke="var(--blush)" stroke-width="5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </span>
+      <span class="card-body">
+        <span class="name">PRISM</span>
+        <span class="desc">A universal image format, spec written before any encoder code existed &mdash; lossless raster, a format-defined reconstruction function, and a binary vector payload. Compresses to 34% of raw, ahead of PNG and QOI.</span>
+        <span class="tags"><span class="tag">Rust</span></span>
+      </span>
     </a>
-    <a class="project" href="https://bknie1.github.io/everquest-maps/">
-      <div class="name">EverQuest Maps</div>
-      <div class="desc">Vector-drawn maps for a really old game.</div>
+
+    <a class="card" href="https://bknie1.github.io/everquest-maps/">
+      <span class="card-banner">
+        <img src="assets/img/everquest-maps-hero.png" alt="Emoda Legends Maps: a hand-drawn parchment atlas of the EverQuest Old World" loading="lazy" width="1800" height="720">
+      </span>
+      <span class="card-body">
+        <span class="name">EverQuest Maps</span>
+        <span class="desc">Hand-drawn, vector-built parchment atlas for EverQuest Legends and Project 1999 &mdash; 79 zones, 349 points of interest, built layer by layer. Browse every map live, no install.</span>
+        <span class="tags"><span class="tag">Vector art</span><span class="tag">79 zones</span></span>
+      </span>
     </a>
-    <a class="project" href="https://github.com/bknie1/Amber">
-      <div class="name">Amber</div>
-      <div class="desc">Archived moments, browsable every revision - a visual timelapse history for your projects.</div>
+
+    <a class="card" href="https://github.com/bknie1/Amber">
+      <span class="card-banner">
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A drop of amber with a small frozen fern inside">
+          <defs>
+            <linearGradient id="amberGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="var(--blush)"/>
+              <stop offset="100%" stop-color="var(--accent)"/>
+            </linearGradient>
+          </defs>
+          <path d="M160 22 C198 60 222 90 222 116 C222 144 194 156 160 156 C126 156 98 144 98 116 C98 90 122 60 160 22 Z"
+                fill="url(#amberGrad)" stroke="var(--accent-2-deep)" stroke-width="1.5"/>
+          <path d="M160 132 V78 M160 100 L142 88 M160 108 L180 96 M160 118 L144 108 M160 90 L176 80"
+                stroke="var(--accent-2)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.85"/>
+          <ellipse cx="138" cy="58" rx="10" ry="18" fill="var(--card)" opacity="0.3" transform="rotate(-18 138 58)"/>
+        </svg>
+      </span>
+      <span class="card-body">
+        <span class="name">Amber</span>
+        <span class="desc">Archived moments, browsable every revision &mdash; a visual timelapse history for your projects, alongside the git history. Headless capture, a scrub-through viewer, GIF or MP4 export.</span>
+        <span class="tags"><span class="tag">Node.js</span><span class="tag">Playwright</span></span>
+      </span>
     </a>
+
   </div>
-  <p class="lead" style="margin-top: 2rem;">I also do private development work for
+
+  <p class="lead footnote">I also do private development work for
   UC Davis, at <a href="https://iet.ucdavis.edu/about">IET</a>.</p>
   <footer>
     <a href="https://github.com/bknie1">github.com/bknie1</a>
