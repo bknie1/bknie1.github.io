@@ -6,22 +6,13 @@
 <title>Foundering</title>
 <style>
   :root {
-    --bg: #161a17;
-    --ink: #eae7e1;
-    --muted: #9ba39c;
-    --card: #202521;
-    --edge: #333a33;
-    --accent: #d98f6c;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #f4f3f1;
-      --ink: #2e322f;
-      --muted: #767c77;
-      --card: #ffffff;
-      --edge: #e0ded9;
-      --accent: #b57b66;
-    }
+    --bg: #f4f3f1;
+    --ink: #2e322f;
+    --muted: #666c67;
+    --card: #ffffff;
+    --edge: #e0ded9;
+    --accent: #b57b66;
+    --accent-2-deep: #4c574f;
   }
   * { box-sizing: border-box; }
   body {
@@ -33,13 +24,13 @@
   }
   main { max-width: 36rem; width: 100%; }
   .kicker { color: var(--accent); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.72rem; margin: 0 0 0.4rem; }
-  h1 { font-size: 2.4rem; margin: 0 0 0.4rem; letter-spacing: -0.02em; }
+  h1 { font-size: 2.4rem; margin: 0 0 0.4rem; letter-spacing: -0.02em; color: var(--accent-2-deep); }
   p.lead { color: var(--muted); margin: 0 0 1.6rem; font-size: 1.05rem; }
   p { margin: 0 0 1.1rem; }
   h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 1.8rem 0 0.7rem; }
   ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
   li { padding: 0.7rem 0.9rem; background: var(--card); border: 1px solid var(--edge); border-radius: 10px; font-size: 0.94rem; }
-  li b { color: var(--accent); }
+  li b { color: var(--accent-2-deep); }
   .cta { display: inline-block; margin-top: 1.8rem; margin-right: 0.6rem; padding: 0.7rem 1.2rem; background: var(--accent); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 700; }
   .cta.secondary { background: transparent; color: var(--accent); border: 1px solid var(--edge); }
   .note { color: var(--muted); font-size: 0.82rem; margin-top: 0.8rem; }

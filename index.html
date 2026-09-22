@@ -6,36 +6,19 @@
 <title>Brandon Knieriem</title>
 <style>
   :root {
-    /* dark, evergreen-adjacent */
-    --bg: #161a17;
-    --bg-alt: #1d2320;
-    --ink: #eae7e1;
-    --muted: #9ba39c;
-    --card: #202521;
-    --edge: #333a33;
-    --accent: #d98f6c;
-    --accent-2: #93a08f;
-    --accent-2-deep: #b9c2b2;
-    --sage: #8b9388;
-    --sage-soft: #4b5249;
-    --blush: #4a4038;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      /* the earthy sage palette from Brandon's resume */
-      --bg: #f4f3f1;
-      --bg-alt: #f7f2eb;
-      --ink: #2e322f;
-      --muted: #767c77;
-      --card: #ffffff;
-      --edge: #e0ded9;
-      --accent: #b57b66;
-      --accent-2: #68756d;
-      --accent-2-deep: #4c574f;
-      --sage: #a1a79e;
-      --sage-soft: #cbcfc8;
-      --blush: #decebf;
-    }
+    /* the earthy sage palette from Brandon's resume */
+    --bg: #f4f3f1;
+    --bg-alt: #f7f2eb;
+    --ink: #2e322f;
+    --muted: #666c67;
+    --card: #ffffff;
+    --edge: #e0ded9;
+    --accent: #b57b66;
+    --accent-2: #68756d;
+    --accent-2-deep: #4c574f;
+    --sage: #a1a79e;
+    --sage-soft: #cbcfc8;
+    --blush: #decebf;
   }
   * { box-sizing: border-box; }
   body {
@@ -47,9 +30,13 @@
     padding: 3rem 1.25rem 2.5rem;
   }
   main { max-width: 62rem; width: 100%; margin: 0 auto; }
-  h1 { font-size: 2rem; margin: 0 0 0.3rem; letter-spacing: -0.02em; }
-  p.lead { color: var(--muted); margin: 0 0 2.25rem; max-width: 38rem; }
+  h1 { font-size: 2rem; margin: 0 0 0.3rem; letter-spacing: -0.02em; color: var(--accent-2-deep); }
+  p.lead { color: var(--muted); margin: 0 0 1.1rem; max-width: 38rem; }
   p.lead a { color: var(--accent); }
+  .accent-bar {
+    width: 11rem; height: 4px; border-radius: 999px; margin: 0 0 2.25rem;
+    background: linear-gradient(90deg, var(--accent-2) 0%, var(--sage) 55%, var(--accent) 100%);
+  }
 
   .projects {
     display: grid;
@@ -78,7 +65,7 @@
     width: 100%; height: 100%; display: block; object-fit: cover;
   }
   .card-body { padding: 1rem 1.15rem 1.15rem; display: flex; flex-direction: column; flex: 1; }
-  .card .name { font-weight: 700; color: var(--accent); font-size: 1.02rem; }
+  .card .name { font-weight: 700; color: var(--accent-2-deep); font-size: 1.02rem; }
   .card .desc { color: var(--muted); font-size: 0.88rem; margin-top: 0.35rem; flex: 1; }
   .card .tags { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .card .tag {
@@ -95,25 +82,26 @@
 <main>
   <h1>Brandon Knieriem</h1>
   <p class="lead">Personal projects, live and in progress.</p>
+  <div class="accent-bar"></div>
 
   <div class="projects">
 
     <a class="card" href="foundering.html">
       <span class="card-banner">
         <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a ship hull with a flooded lower deck">
-          <rect x="24" y="18" width="272" height="116" rx="14" fill="var(--card)" stroke="var(--sage)" stroke-width="2"/>
+          <rect x="24" y="18" width="272" height="116" rx="14" fill="var(--card)" stroke="#3a4c52" stroke-width="2"/>
           <line x1="24" y1="56" x2="296" y2="56" stroke="var(--edge)" stroke-width="2"/>
           <line x1="24" y1="94" x2="296" y2="94" stroke="var(--edge)" stroke-width="2"/>
-          <path d="M24 94 Q60 86 96 94 T168 94 T240 94 T296 94 V134 H24 Z" fill="var(--accent-2)" opacity="0.4"/>
-          <g fill="var(--accent)">
+          <path d="M24 94 Q60 86 96 94 T168 94 T240 94 T296 94 V134 H24 Z" fill="#4f7a8c" opacity="0.45"/>
+          <g fill="#d99a5b">
             <circle cx="60" cy="37" r="6"/><circle cx="100" cy="37" r="6"/><circle cx="140" cy="37" r="6"/>
             <circle cx="180" cy="37" r="6"/><circle cx="220" cy="37" r="6"/><circle cx="260" cy="37" r="6"/>
           </g>
-          <g fill="var(--accent-2-deep)" opacity="0.55">
+          <g fill="#6b8894" opacity="0.6">
             <circle cx="60" cy="75" r="6"/><circle cx="100" cy="75" r="6"/><circle cx="140" cy="75" r="6"/>
             <circle cx="180" cy="75" r="6"/><circle cx="220" cy="75" r="6"/><circle cx="260" cy="75" r="6"/>
           </g>
-          <g fill="var(--sage-soft)" opacity="0.8">
+          <g fill="#2f4750" opacity="0.75">
             <circle cx="60" cy="113" r="6"/><circle cx="100" cy="113" r="6"/><circle cx="140" cy="113" r="6"/>
             <circle cx="180" cy="113" r="6"/><circle cx="220" cy="113" r="6"/><circle cx="260" cy="113" r="6"/>
           </g>
@@ -169,9 +157,9 @@
         <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A beam of light entering a prism and splitting into three colored beams">
           <line x1="20" y1="85" x2="118" y2="85" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>
           <polygon points="150,35 108,130 192,130" fill="var(--sage)" stroke="var(--accent-2-deep)" stroke-width="2"/>
-          <path d="M162 92 L286 55" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" fill="none"/>
-          <path d="M168 96 L292 96" stroke="var(--accent-2)" stroke-width="5" stroke-linecap="round" fill="none"/>
-          <path d="M162 100 L286 137" stroke="var(--blush)" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M162 92 L286 55" stroke="#b34d42" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M168 96 L292 96" stroke="#5c8a52" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M162 100 L286 137" stroke="#4d76a3" stroke-width="5" stroke-linecap="round" fill="none"/>
         </svg>
       </span>
       <span class="card-body">
