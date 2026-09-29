@@ -6,14 +6,16 @@
 <title>Brandon Knieriem</title>
 <style>
   :root {
-    /* the earthy sage palette from Brandon's resume */
-    --bg: #f4f3f1;
-    --bg-alt: #f7f2eb;
+    /* the earthy sage palette from Brandon's resume, applied a shade cozier:
+       a warm sand backdrop so the paper-white cards actually lift off it */
+    --bg: #e6dbc8;
+    --bg-glow: #f2e6d2;
+    --bg-alt: #f0e6d5;
     --ink: #2e322f;
-    --muted: #666c67;
-    --card: #ffffff;
-    --edge: #e0ded9;
-    --accent: #b57b66;
+    --muted: #6e6a5c;
+    --card: #fbf6ee;
+    --edge: #d9c9ab;
+    --accent: #b0674e;
     --accent-2: #68756d;
     --accent-2-deep: #4c574f;
     --sage: #a1a79e;
@@ -24,7 +26,7 @@
   body {
     margin: 0;
     min-height: 100vh;
-    background: var(--bg);
+    background: radial-gradient(1100px 620px at 18% -8%, var(--bg-glow) 0%, var(--bg) 55%);
     color: var(--ink);
     font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
     padding: 3rem 1.25rem 2.5rem;
@@ -52,12 +54,17 @@
     text-decoration: none;
     color: inherit;
     overflow: hidden;
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    box-shadow: 0 1px 2px rgba(46, 39, 26, 0.06), 0 8px 20px -12px rgba(46, 39, 26, 0.28);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   }
-  a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  a.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 2px 4px rgba(46, 39, 26, 0.08), 0 14px 28px -14px rgba(176, 103, 78, 0.4);
+  }
   .card-banner {
     aspect-ratio: 16 / 8;
-    background: var(--bg-alt);
+    background: linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%);
     display: block;
     overflow: hidden;
   }
