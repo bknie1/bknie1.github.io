@@ -5,79 +5,101 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brandon Knieriem, Systems Architect and Principal Engineer</title>
 <meta name="description" content="Brandon Knieriem, systems architect and principal engineer. Student systems, design systems, and the integrations between them.">
+<script>(function(){try{var d=document.documentElement,q=location.search,t=(q.match(/[?&]theme=(orange|sage)/)||[])[1]||localStorage.getItem("bk-theme"),m=(q.match(/[?&]motion=(on|off)/)||[])[1]||localStorage.getItem("bk-motion");if(t!=="orange"&&t!=="sage")t=matchMedia("(prefers-color-scheme: dark)").matches?"sage":"orange";if(m!=="on"&&m!=="off")m=matchMedia("(prefers-reduced-motion: reduce)").matches?"off":"on";d.setAttribute("data-theme",t);d.setAttribute("data-motion",m);d.className+=" js";}catch(e){document.documentElement.setAttribute("data-theme","orange");document.documentElement.setAttribute("data-motion","off");}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f3f2ec;
-    --paper-2: #e6e5dd;
-    --white: #ffffff;
-    --ink: #0c0c0d;
-    --mute: #55554f;
-    --grey: #b7b6ad;
-    --hot: #ff4a00;
+    color-scheme: light;
+    --paper: #f3f2ec; --paper-2: #e6e5dd; --surface: #ffffff; --ink: #0c0c0d; --mute: #55554f; --grey: #b7b6ad;
+    --hot: #ff4a00; --on-hot: #0c0c0d;
+    --band: #0c0c0d; --on-band: #f3f2ec; --band-accent: #ff4a00; --band-rule: #3a3a36;
+    --block: #0c0c0d; --on-block: #f3f2ec; --on-grey: #0c0c0d;
+    --lift: #ff4a00; --focus: #ff4a00; --stripe: #0c0c0d;
+    --mk-tile: #0c0c0d; --mk-disc: #ff4a00; --mk-letter: #f3f2ec; --mk-accent: #ff4a00;
     /* names the figures and banners already use */
-    --bg: var(--paper);
-    --bg-alt: var(--paper-2);
-    --card: var(--white);
-    --edge: var(--ink);
-    --muted: var(--mute);
-    --accent: var(--hot);
-    --accent-2: #3a3a36;
-    --accent-2-deep: var(--ink);
-    --sage: var(--grey);
-    --sage-soft: #d6d5cd;
-    --blush: #ffd3bf;
+    --bg: var(--paper); --bg-alt: var(--paper-2); --card: var(--surface); --edge: var(--ink); --muted: var(--mute);
+    --accent: var(--hot); --accent-2: #3a3a36; --on-accent-2: #f3f2ec; --accent-2-deep: var(--ink);
+    --sage: var(--grey); --sage-soft: #d6d5cd; --blush: #ffd3bf;
     --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
     --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --gutter: clamp(1rem, 4vw, 2.5rem);
     --max: 76rem;
     --rule: 3px solid var(--ink);
+    --sy: 0;
+  }
+  :root[data-theme="sage"] {
+    color-scheme: dark;
+    --paper: #141916; --paper-2: #1c231f; --surface: #19201c; --ink: #e9ede5; --mute: #a4ae9f; --grey: #3f4a43;
+    --hot: #ffd60a; --on-hot: #121512;
+    --band: #a9b8a2; --on-band: #121512; --band-accent: #3d2b70; --band-rule: #8c9c86;
+    --block: #a9b8a2; --on-block: #121512; --on-grey: #e9ede5;
+    --lift: #9d8cff; --focus: #b8abff; --stripe: #121512;
+    --mk-tile: #a9b8a2; --mk-disc: #ffd60a; --mk-letter: #121512; --mk-accent: #3d2b70;
+    --accent-2: #7d8b7d; --on-accent-2: #121512; --sage-soft: #2a332d; --blush: #fff0a8;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  html { background: var(--paper); scroll-behavior: smooth; }
+  :root[data-motion="off"] { scroll-behavior: auto; }
+  body { margin: 0; position: relative; color: var(--ink); font: 400 1rem/1.6 var(--body); -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   .wrap { max-width: var(--max); margin: 0 auto; padding-inline: var(--gutter); }
-  .skip { position: absolute; left: -999px; top: 0; background: var(--hot); color: var(--ink); padding: 0.6rem 0.9rem; font: 600 0.8rem/1 var(--mono); z-index: 5; }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--hot); color: var(--on-hot); padding: 0.6rem 0.9rem; font: 600 0.8rem/1 var(--mono); z-index: 5; }
   .skip:focus { left: 0; }
 
+  /* slow dotted field behind the page */
+  body::before { content: ""; position: fixed; inset: -30vh 0; z-index: -1; pointer-events: none; opacity: 0.4;
+    background-image: radial-gradient(var(--grey) 1px, transparent 1.3px); background-size: 28px 28px;
+    transform: translate3d(0, calc(var(--sy) * -0.06px), 0); }
+
   /* system bar */
-  .bar { background: var(--ink); color: var(--paper); font: 500 0.7rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
-  .bar .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem 1.5rem; padding-block: 0.7rem; }
-  .bar b { color: var(--hot); font-weight: 600; }
-  .bar .jp { letter-spacing: 0.2em; }
+  .bar { background: var(--band); color: var(--on-band); font: 500 0.7rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .bar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.45rem 1.5rem; padding-block: 0.6rem; }
+  .bar b { color: var(--band-accent); font-weight: 600; }
+  .lang { display: inline-block; min-width: 21em; }
+  @media (min-width: 760px) { .lang { text-align: center; } }
+  .lang span { display: inline-block; transition: opacity 0.22s ease, transform 0.22s ease; }
+  .lang span.sw { opacity: 0; transform: translateY(-0.5em); }
+  .ctl { display: none; gap: 0.4rem; }
+  .js .ctl { display: inline-flex; }
+  .ctl button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 1px solid currentColor; padding: 0.35rem 0.55rem; min-height: 1.9rem; cursor: pointer; }
+  .ctl button:hover { background: var(--on-band); color: var(--band); }
+  .ctl button:hover b { color: inherit; }
 
   /* hero */
-  .hero { border-bottom: var(--rule); }
-  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem); }
+  .hero { position: relative; overflow: hidden; border-bottom: var(--rule); }
+  .hero-art { position: absolute; top: -9rem; right: -11rem; width: 40rem; max-width: 120vw; pointer-events: none; opacity: 0.9;
+    transform: translate3d(0, calc(var(--sy) * 0.22px), 0) rotate(calc(var(--sy) * 0.025deg)); }
+  .hero-art svg { display: block; width: 100%; height: auto; }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem); }
   @media (min-width: 900px) { .hero .wrap { grid-template-columns: minmax(0, 1fr) 15rem; align-items: end; } }
   h1 { margin: 0 0 0 -0.065em; font: 900 clamp(2.7rem, 11.2vw, 8.4rem)/0.84 var(--display); font-stretch: 118%; letter-spacing: -0.035em; text-transform: uppercase; }
   h1 span { display: block; }
   h1 .l2 { color: var(--hot); }
-  .role { display: inline-block; margin: 1.5rem 0 1.1rem; background: var(--ink); color: var(--paper); font: 600 0.78rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.55rem 0.8rem; }
+  .role { display: inline-block; margin: 1.5rem 0 1.1rem; background: var(--band); color: var(--on-band); font: 600 0.78rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.55rem 0.8rem; }
   .lead { max-width: 44rem; margin: 0 0 1.5rem; font-size: 1.06rem; }
   .links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-  .btn { display: inline-flex; align-items: center; min-height: 2.75rem; font: 600 0.76rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.8rem 1rem; border: 2px solid var(--ink); color: var(--ink); background: transparent; }
+  .where { display: flex; align-items: center; gap: 0.6rem; margin: 1.3rem 0 0; font: 600 0.72rem/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .where::before { content: ""; flex: none; width: 0.6em; height: 0.6em; background: var(--hot); }
+  .btn { display: inline-flex; align-items: center; min-height: 2.75rem; font: 600 0.76rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.8rem 1rem; border: 2px solid var(--ink); color: var(--ink); background: var(--paper); }
   .btn:hover { background: var(--ink); color: var(--paper); }
-  .btn.primary { background: var(--hot); }
-  .btn.primary:hover { background: var(--ink); color: var(--hot); }
+  .btn.primary { background: var(--hot); color: var(--on-hot); }
+  .btn.primary:hover { background: var(--ink); color: var(--paper); }
   .mark { width: 100%; }
   .mark svg { display: block; width: 100%; height: auto; }
-  @media (max-width: 899px) { .mark { width: 7.5rem; order: -1; } }
+  @media (max-width: 899px) { .mark { width: 7.5rem; order: -1; } .hero-art { width: 26rem; top: -7rem; right: -12rem; opacity: 0.55; } }
 
   /* discipline strip */
-  .strip { background: var(--ink); color: var(--paper); overflow: hidden; }
+  .strip { background: var(--band); color: var(--on-band); overflow: hidden; }
   .strip p { margin: 0; display: flex; flex-wrap: wrap; gap: 0.55rem 1.5rem; padding-block: 0.85rem; font: 800 clamp(0.7rem, 0.98vw, 0.84rem)/1 var(--display); font-stretch: 125%; letter-spacing: 0.05em; text-transform: uppercase; }
   .strip span { display: inline-flex; align-items: center; gap: 0.55rem; white-space: nowrap; }
-  .strip span::before { content: ""; width: 0.55em; height: 0.55em; background: var(--hot); }
+  .strip span::before { content: ""; width: 0.55em; height: 0.55em; background: var(--band-accent); }
 
   /* numbers */
-  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: var(--rule); border-left: 1px solid var(--ink); }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: var(--rule); border-left: 1px solid var(--ink); background: var(--paper); }
   @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .stat { padding: 1.3rem 1.1rem 1.2rem; border-right: 1px solid var(--ink); border-top: 1px solid var(--ink); margin-top: -1px; }
   .stat b { display: block; margin-left: -0.04em; font: 900 clamp(2rem, 5.2vw, 3.5rem)/0.9 var(--display); font-stretch: 112%; letter-spacing: -0.03em; }
@@ -90,16 +112,16 @@
   .sec .lead { grid-column: 1 / -1; margin: 0.9rem 0 0; font-size: 1rem; color: var(--mute); }
 
   /* milestones */
-  .miles { list-style: none; margin: 0; padding: 0; border: 2px solid var(--ink); background: var(--ink); color: var(--paper); counter-reset: m; }
-  .miles li { counter-increment: m; display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0.4rem 1rem; align-items: baseline; padding: 0.95rem 1.2rem; border-top: 1px solid #3a3a36; font-size: 1rem; }
+  .miles { list-style: none; margin: 0; padding: 0; border: 2px solid var(--band); background: var(--band); color: var(--on-band); counter-reset: m; }
+  .miles li { counter-increment: m; display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0.4rem 1rem; align-items: baseline; padding: 0.95rem 1.2rem; border-top: 1px solid var(--band-rule); font-size: 1rem; }
   .miles li:first-child { border-top: 0; }
-  .miles li::before { content: counter(m, decimal-leading-zero); font: 800 1.15rem/1 var(--display); font-stretch: 125%; color: var(--hot); }
+  .miles li::before { content: counter(m, decimal-leading-zero); font: 800 1.15rem/1 var(--display); font-stretch: 125%; color: var(--band-accent); }
 
   /* case studies */
   .cases { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-  .case { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); border: 2px solid var(--ink); background: var(--white); }
+  .case { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); border: 2px solid var(--ink); background: var(--surface); }
   @media (min-width: 820px) { .case { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
-  .case::before { content: attr(data-n); position: absolute; top: -2px; right: -2px; background: var(--ink); color: var(--paper); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.1em; padding: 0.45rem 0.6rem; }
+  .case::before { content: attr(data-n); position: absolute; top: -2px; right: -2px; background: var(--band); color: var(--on-band); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.1em; padding: 0.45rem 0.6rem; }
   .case-figure { background-color: var(--paper-2); background-image: radial-gradient(var(--grey) 1px, transparent 1.2px); background-size: 14px 14px; border-bottom: 2px solid var(--ink); padding: 1.5rem 1.25rem 1.1rem; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; }
   @media (min-width: 820px) { .case-figure { border-bottom: 0; border-right: 2px solid var(--ink); } }
   .case-figure svg { width: 100%; height: auto; max-height: 270px; display: block; }
@@ -115,17 +137,16 @@
   .fig-num { font: 800 15px/1.1 var(--display); fill: var(--ink); }
 
   /* earlier work and credentials */
-  .earlier { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border: 2px solid var(--ink); background: var(--white); overflow: hidden; }
+  .earlier { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border: 2px solid var(--ink); background: var(--surface); overflow: hidden; }
   .earlier div { padding: 1.1rem 1.2rem 1.2rem; font-size: 0.92rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin: 0 -1px -1px 0; }
   .earlier b { display: block; font: 800 1.05rem/1.15 var(--display); }
   .earlier span { display: block; margin: 0.35rem 0 0.55rem; font: 500 0.68rem/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
 
   /* personal projects */
   .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; counter-reset: p; }
-  a.card { counter-increment: p; position: relative; display: flex; flex-direction: column; border: 2px solid var(--ink); background: var(--white); text-decoration: none; color: inherit; transition: transform 0.12s ease, box-shadow 0.12s ease; }
-  a.card:hover, a.card:focus-visible { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--hot); }
-  @media (prefers-reduced-motion: reduce) { a.card { transition: none; } a.card:hover, a.card:focus-visible { transform: none; } }
-  a.card::before { content: "P." counter(p, decimal-leading-zero); position: absolute; top: 0; left: 0; z-index: 1; background: var(--ink); color: var(--paper); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.1em; padding: 0.45rem 0.6rem; }
+  a.card { counter-increment: p; position: relative; display: flex; flex-direction: column; border: 2px solid var(--ink); background: var(--surface); text-decoration: none; color: inherit; transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  a.card:hover, a.card:focus-visible { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--lift); }
+  a.card::before { content: "P." counter(p, decimal-leading-zero); position: absolute; top: 0; left: 0; z-index: 1; background: var(--band); color: var(--on-band); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.1em; padding: 0.45rem 0.6rem; }
   .card-banner { aspect-ratio: 16 / 8; background: var(--paper-2); display: block; overflow: hidden; border-bottom: 2px solid var(--ink); }
   .card-banner svg, .card-banner img { width: 100%; height: 100%; display: block; object-fit: cover; }
   .card-body { padding: 1.1rem 1.15rem 1.2rem; display: flex; flex-direction: column; flex: 1; }
@@ -134,13 +155,21 @@
   .card .tags { margin-top: 0.9rem; }
 
   /* footer */
-  .foot { margin-top: clamp(3.5rem, 8vw, 6rem); background: var(--ink); color: var(--paper); }
-  .foot::before { content: ""; display: block; height: 14px; background: repeating-linear-gradient(-45deg, var(--hot) 0 14px, var(--ink) 14px 28px); }
+  .foot { position: relative; margin-top: clamp(3.5rem, 8vw, 6rem); background: var(--band); color: var(--on-band); }
+  .foot::before { content: ""; display: block; height: 14px; background: repeating-linear-gradient(-45deg, var(--hot) 0 14px, var(--stripe) 14px 28px); }
   .foot .wrap { display: grid; gap: 1.2rem; padding-block: 2.2rem 2.4rem; }
   .foot .big { margin: 0 0 0 -0.04em; font: 900 clamp(1.8rem, 7vw, 5rem)/0.9 var(--display); font-stretch: 118%; letter-spacing: -0.03em; text-transform: uppercase; }
-  .foot .big em { font-style: normal; color: var(--hot); }
+  .foot .big em { font-style: normal; color: var(--band-accent); }
   .foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; font: 500 0.78rem/1.4 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
-  .foot a { text-decoration-color: var(--hot); text-underline-offset: 0.25em; }
+  .foot a { text-decoration-color: var(--band-accent); text-underline-offset: 0.25em; }
+
+  /* scroll reveals: only when scripting is on and motion is on */
+  .js[data-motion="on"] .rv { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: var(--d, 0ms); }
+  .js[data-motion="on"] .rv.in { opacity: 1; transform: none; }
+  .js[data-motion="on"] a.card.rv.in { transition: opacity 0.5s ease-out, transform 0.12s ease, box-shadow 0.12s ease; transition-delay: 0ms; }
+  :root[data-motion="off"] body::before, :root[data-motion="off"] .hero-art { transform: none; }
+  :root[data-motion="off"] a.card, :root[data-motion="off"] .lang span { transition: none; }
+  :root[data-motion="off"] a.card:hover, :root[data-motion="off"] a.card:focus-visible { transform: none; }
 </style>
 </head>
 <body>
@@ -149,12 +178,28 @@
 <div class="bar">
   <div class="wrap">
     <span><b>BK-SYS</b> / Portfolio 2026</span>
-    <span class="jp" lang="ja" aria-hidden="true">システム / デザイン / エンジニアリング</span>
-    <span>Sacramento, CA / Relocating: Bay Area, Seattle, Los Angeles</span>
+    <span class="lang" aria-hidden="true"><span id="lang" lang="en">Systems / Design / Engineering</span></span>
+    <span class="ctl">
+      <button type="button" id="t-theme" aria-label="Switch colour theme">Theme: <b>Orange</b></button>
+      <button type="button" id="t-motion" aria-label="Motion and animation" aria-pressed="true">Motion: <b>On</b></button>
+    </span>
   </div>
 </div>
 
 <header class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <g fill="none" stroke="var(--grey)">
+        <circle cx="320" cy="320" r="300" stroke-width="1.5"/>
+        <circle cx="320" cy="320" r="236" stroke-width="1.5" stroke-dasharray="3 9"/>
+        <circle cx="320" cy="320" r="150" stroke-width="1.5"/>
+        <path d="M320 0v640M0 320h640" stroke-width="1"/>
+        <path d="M108 108l424 424M532 108L108 532" stroke-width="1" stroke-dasharray="1 10"/>
+      </g>
+      <g fill="var(--hot)"><rect x="312" y="12" width="16" height="16"/><rect x="612" y="312" width="16" height="16"/></g>
+      <circle cx="320" cy="320" r="62" fill="none" stroke="var(--hot)" stroke-width="3"/>
+    </svg>
+  </div>
   <div class="wrap">
     <div>
       <h1><span>Brandon</span><span class="l2">Knieriem</span></h1>
@@ -167,13 +212,14 @@
         <a class="btn" href="#work">Work</a>
         <a class="btn" href="#projects">Projects</a>
       </div>
+      <p class="where">Relocating: Bay Area / Los Angeles / Seattle / Open to others</p>
     </div>
     <div class="mark">
       <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <rect width="240" height="240" rx="26" fill="#0c0c0d"/>
-        <circle cx="156" cy="98" r="66" fill="#ff4a00"/>
-        <circle cx="156" cy="98" r="84" fill="none" stroke="#f3f2ec" stroke-width="1.5" stroke-dasharray="2 7"/>
-        <g fill="#f3f2ec">
+        <rect width="240" height="240" rx="26" fill="var(--mk-tile)"/>
+        <circle cx="156" cy="98" r="66" fill="var(--mk-disc)"/>
+        <circle cx="156" cy="98" r="84" fill="none" stroke="var(--mk-letter)" stroke-width="1.5" stroke-dasharray="2 7"/>
+        <g fill="var(--mk-letter)">
           <rect x="36" y="54" width="22" height="92"/>
           <path d="M58 54h16a23 23 0 0 1 0 46H58z"/>
           <path d="M58 100h20a23 23 0 0 1 0 46H58z"/>
@@ -181,22 +227,22 @@
           <polygon points="134,100 160,54 188,54 152,110"/>
           <polygon points="144,98 188,146 160,146 134,116"/>
         </g>
-        <g fill="#0c0c0d"><rect x="58" y="68" width="14" height="18" rx="7"/><rect x="58" y="114" width="18" height="18" rx="7"/></g>
-        <g fill="#f3f2ec">
+        <g fill="var(--mk-tile)"><rect x="58" y="68" width="14" height="18" rx="7"/><rect x="58" y="114" width="18" height="18" rx="7"/></g>
+        <g fill="var(--mk-letter)">
           <rect x="36" y="176" width="3" height="28"/><rect x="43" y="176" width="7" height="28"/><rect x="54" y="176" width="2" height="28"/>
           <rect x="60" y="176" width="5" height="28"/><rect x="69" y="176" width="2" height="28"/><rect x="75" y="176" width="9" height="28"/>
           <rect x="88" y="176" width="3" height="28"/><rect x="95" y="176" width="6" height="28"/><rect x="105" y="176" width="2" height="28"/>
         </g>
-        <text x="204" y="190" text-anchor="end" fill="#f3f2ec" style="font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em">BK-SYS</text>
-        <text x="204" y="204" text-anchor="end" fill="#ff4a00" style="font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em">EST 2018</text>
-        <path d="M22 22h14M29 15v14" stroke="#f3f2ec" stroke-width="1.5"/>
+        <text x="204" y="190" text-anchor="end" fill="var(--mk-letter)" style="font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em">BK-SYS</text>
+        <text x="204" y="204" text-anchor="end" fill="var(--mk-accent)" style="font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em">EST 2018</text>
+        <path d="M22 22h14M29 15v14" stroke="var(--mk-letter)" stroke-width="1.5"/>
       </svg>
     </div>
   </div>
 </header>
 
 <div class="strip" aria-hidden="true">
-  <div class="wrap"><p><span>Full stack</span><span>Design systems</span><span>Accessibility</span><span>Integration architecture</span><span>C# and .NET</span><span>SQL Server</span><span>Rust</span></p></div>
+  <div class="wrap"><p><span>Full stack</span><span>Design systems</span><span>Accessibility</span><span>Integration architecture</span><span>C# and .NET</span><span>SQL Server</span><span>JavaScript</span></p></div>
 </div>
 
 <main>
@@ -217,7 +263,7 @@
     <li>Own the student records platform where a wrong answer decides whether a student graduates; replaced a decade of legacy audit logic.</li>
     <li>Built a design system that is accessible by construction; the in-house WCAG audit last ran clean on all 167 pages.</li>
     <li>Measured my team's delivery with Lorenz curves and Gini coefficients, then fixed it: estimation coverage from 24 to 100 percent.</li>
-    <li>Built PRISM, a dependency-free image format in Rust that compresses to 34.0 percent of raw, against PNG at 35.9.</li>
+    <li>Stood up test infrastructure from zero: unit, browser-driven end-to-end, and visual regression in one documented harness.</li>
     <li>First author on a peer-reviewed Springer paper.</li>
   </ol>
 
@@ -238,9 +284,9 @@
             <line x1="180" y1="115" x2="180" y2="205"/>
           </g>
           <g>
-            <rect x="120" y="88" width="120" height="54" rx="12" fill="var(--ink)" />
-            <text x="180" y="111" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">Student records</text>
-            <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">C# and SQL Server</text>
+            <rect x="120" y="88" width="120" height="54" rx="12" fill="var(--block)" />
+            <text x="180" y="111" text-anchor="middle" class="fig-label" style="fill:var(--on-block)">Student records</text>
+            <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:var(--on-block)">C# and SQL Server</text>
           </g>
           <g fill="var(--card)" stroke="var(--edge)">
             <rect x="14" y="18" width="112" height="44" rx="10"/><rect x="234" y="18" width="112" height="44" rx="10"/>
@@ -278,11 +324,11 @@
             <rect x="10" y="30" width="104" height="60" rx="10"/>
             <rect x="246" y="30" width="104" height="60" rx="10"/>
           </g>
-          <rect x="128" y="30" width="104" height="60" rx="12" fill="var(--ink)"/>
+          <rect x="128" y="30" width="104" height="60" rx="12" fill="var(--block)"/>
           <text x="62" y="56" text-anchor="middle" class="fig-label">Requirement</text>
           <text x="62" y="72" text-anchor="middle" class="fig-small">decisions, scoped</text>
-          <text x="180" y="56" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">Overall decision</text>
-          <text x="180" y="72" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">state model</text>
+          <text x="180" y="56" text-anchor="middle" class="fig-label" style="fill:var(--on-block)">Overall decision</text>
+          <text x="180" y="72" text-anchor="middle" class="fig-small" style="fill:var(--on-block)">state model</text>
           <text x="298" y="56" text-anchor="middle" class="fig-label">Notification</text>
           <text x="298" y="72" text-anchor="middle" class="fig-small">college templates</text>
           <g stroke="var(--hot)" stroke-width="2" fill="none">
@@ -312,20 +358,20 @@
           <g>
             <rect x="18" y="44" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
             <rect x="18" y="44" width="154" height="26" rx="6" fill="var(--sage)"/>
-            <text x="26" y="62" class="fig-small" style="fill:#2e322f">before the pass</text>
+            <text x="26" y="62" class="fig-small" style="fill:var(--on-grey)">before the pass</text>
             <text x="318" y="62" text-anchor="end" class="fig-num" style="font-size:12px">88 of 171</text>
           </g>
           <g>
             <rect x="18" y="86" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
             <rect x="18" y="86" width="277" height="26" rx="6" fill="var(--accent-2)"/>
-            <text x="26" y="104" class="fig-small" style="fill:#fbf6ee">after the first night</text>
+            <text x="26" y="104" class="fig-small" style="fill:var(--on-accent-2)">after the first night</text>
             <text x="318" y="104" text-anchor="end" class="fig-num" style="font-size:12px">156 of 169</text>
           </g>
           <g>
             <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
-            <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--ink)"/>
-            <text x="26" y="146" class="fig-small" style="fill:#fbf6ee">jQuery-free build, reflow clean</text>
-            <text x="318" y="146" text-anchor="end" class="fig-num" style="font-size:12px;fill:#fbf6ee">167 of 167</text>
+            <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--block)"/>
+            <text x="26" y="146" class="fig-small" style="fill:var(--on-block)">jQuery-free build, reflow clean</text>
+            <text x="318" y="146" text-anchor="end" class="fig-num" style="font-size:12px;fill:var(--on-block)">167 of 167</text>
           </g>
           </svg>
         <p class="fig-caption">One shell on about 170 pages, Bootstrap and jQuery removed, token-based dark mode, brand color ramps from the university guide. The audit runs as a script inside the site: standards at 1366px, reflow at 320px.</p>
@@ -347,15 +393,15 @@
             <rect x="12" y="30" width="110" height="52" rx="10"/><rect x="12" y="140" width="110" height="52" rx="10"/>
             <rect x="238" y="80" width="110" height="64" rx="10"/>
           </g>
-          <rect x="130" y="68" width="100" height="88" rx="12" fill="var(--ink)"/>
+          <rect x="130" y="68" width="100" height="88" rx="12" fill="var(--block)"/>
           <text x="67" y="52" text-anchor="middle" class="fig-label">Check-in kiosk</text>
           <text x="67" y="68" text-anchor="middle" class="fig-small">.NET MAUI, Blazor</text>
           <text x="67" y="162" text-anchor="middle" class="fig-label">Advising metrics</text>
           <text x="67" y="178" text-anchor="middle" class="fig-small">aggregate, per-advisor</text>
-          <text x="180" y="96" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">REST API</text>
-          <text x="180" y="112" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">ASP.NET Core</text>
-          <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">hashed keys, scopes</text>
-          <text x="180" y="142" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">request audit log</text>
+          <text x="180" y="96" text-anchor="middle" class="fig-label" style="fill:var(--on-block)">REST API</text>
+          <text x="180" y="112" text-anchor="middle" class="fig-small" style="fill:var(--on-block)">ASP.NET Core</text>
+          <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:var(--on-block)">hashed keys, scopes</text>
+          <text x="180" y="142" text-anchor="middle" class="fig-small" style="fill:var(--on-block)">request audit log</text>
           <text x="293" y="104" text-anchor="middle" class="fig-label">Stored procedures</text>
           <text x="293" y="120" text-anchor="middle" class="fig-small">SQL Server</text>
           <text x="293" y="134" text-anchor="middle" class="fig-small">no PII in URLs</text>
@@ -381,15 +427,15 @@
           <rect x="18" y="32" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
           <rect x="18" y="32" width="72" height="18" rx="5" fill="var(--sage)"/>
           <text x="98" y="46" class="fig-small">24% before</text>
-          <rect x="18" y="56" width="300" height="18" rx="5" fill="var(--ink)"/>
-          <text x="312" y="70" text-anchor="end" class="fig-small" style="fill:#fbf6ee">100% after</text>
+          <rect x="18" y="56" width="300" height="18" rx="5" fill="var(--block)"/>
+          <text x="312" y="70" text-anchor="end" class="fig-small" style="fill:var(--on-block)">100% after</text>
 
           <text x="18" y="108" class="fig-label">Workload concentration, Gini coefficient</text>
           <rect x="18" y="118" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
           <rect x="18" y="118" width="193" height="18" rx="5" fill="var(--sage)"/>
           <text x="218" y="132" class="fig-small">0.64 before</text>
           <rect x="18" y="142" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
-          <rect x="18" y="142" width="75" height="18" rx="5" fill="var(--ink)"/>
+          <rect x="18" y="142" width="75" height="18" rx="5" fill="var(--block)"/>
           <text x="100" y="156" class="fig-small">0.25 after</text>
 
           </svg>
@@ -554,9 +600,77 @@
       <li><a href="mailto:brandonknieriem26@gmail.com">brandonknieriem26@gmail.com</a></li>
       <li><a href="https://github.com/bknie1">github.com/bknie1</a></li>
       <li><a href="assets/docs/Knieriem, Brandon - Resume.pdf">Resume PDF</a></li>
-      <li>Sacramento, CA, relocating</li>
+      <li>Relocating: Bay Area, Los Angeles, Seattle</li>
     </ul>
   </div>
 </footer>
+<script>(function () {
+  var root = document.documentElement;
+  if (!/\bjs\b/.test(root.className)) return;
+  function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  var themeBtn = document.getElementById("t-theme"), motionBtn = document.getElementById("t-motion");
+  function label() {
+    var t = root.getAttribute("data-theme"), m = root.getAttribute("data-motion");
+    themeBtn.querySelector("b").textContent = t === "sage" ? "Sage" : "Orange";
+    motionBtn.querySelector("b").textContent = m === "on" ? "On" : "Off";
+    motionBtn.setAttribute("aria-pressed", m === "on" ? "true" : "false");
+  }
+  themeBtn.addEventListener("click", function () {
+    var t = root.getAttribute("data-theme") === "sage" ? "orange" : "sage";
+    root.setAttribute("data-theme", t); save("bk-theme", t); label();
+  });
+  motionBtn.addEventListener("click", function () {
+    var m = root.getAttribute("data-motion") === "on" ? "off" : "on";
+    root.setAttribute("data-motion", m); save("bk-motion", m); label();
+    if (m === "off") { root.style.setProperty("--sy", 0); showAll(); } else { onScroll(); }
+  });
+  label();
+  function motionOn() { return root.getAttribute("data-motion") === "on"; }
+
+  // language rotator
+  var langs = [
+    ["en", "Systems / Design / Engineering"],
+    ["de", "Systeme / Gestaltung / Entwicklung"],
+    ["es", "Sistemas / Dise\u00f1o / Ingenier\u00eda"],
+    ["fr", "Syst\u00e8mes / Design / Ing\u00e9nierie"],
+    ["ja", "\u30b7\u30b9\u30c6\u30e0 / \u30c7\u30b6\u30a4\u30f3 / \u30a8\u30f3\u30b8\u30cb\u30a2\u30ea\u30f3\u30b0"]
+  ];
+  var langEl = document.getElementById("lang"), li = 0, hover = false;
+  var bar = document.querySelector(".bar");
+  bar.addEventListener("mouseenter", function () { hover = true; });
+  bar.addEventListener("mouseleave", function () { hover = false; });
+  setInterval(function () {
+    if (!motionOn() || hover || document.hidden) return;
+    li = (li + 1) % langs.length;
+    langEl.classList.add("sw");
+    setTimeout(function () {
+      langEl.setAttribute("lang", langs[li][0]); langEl.textContent = langs[li][1]; langEl.classList.remove("sw");
+    }, 230);
+  }, 3000);
+
+  // parallax: one scroll value feeds the CSS transforms
+  var ticking = false;
+  function onScroll() {
+    if (!motionOn() || ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { root.style.setProperty("--sy", Math.round(window.scrollY)); ticking = false; });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // reveals
+  var items = document.querySelectorAll(".stat, .sec, .miles li, .case, .earlier, a.card");
+  function showAll() { for (var i = 0; i < items.length; i++) items[i].classList.add("in"); }
+  for (var i = 0; i < items.length; i++) {
+    var el = items[i], sibs = el.parentNode.children, k = Array.prototype.indexOf.call(sibs, el);
+    el.classList.add("rv");
+    if (/stat|card/.test(el.className) || el.tagName === "LI") el.style.setProperty("--d", Math.min(k, 5) * 70 + "ms");
+  }
+  if (!("IntersectionObserver" in window) || !motionOn()) { showAll(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+  for (var j = 0; j < items.length; j++) io.observe(items[j]);
+})();</script>
 </body>
 </html>
