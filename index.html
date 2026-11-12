@@ -3,119 +3,204 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Brandon Knieriem</title>
+<title>Brandon Knieriem, Systems Architect and Principal Engineer</title>
 <meta name="description" content="Brandon Knieriem, systems architect and principal engineer. Student systems, design systems, and the integrations between them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #e6dbc8;
-    --bg-glow: #f2e6d2;
-    --bg-alt: #f0e6d5;
-    --ink: #2e322f;
-    --muted: #6e6a5c;
-    --card: #fbf6ee;
-    --edge: #d9c9ab;
-    --accent: #b0674e;
-    --accent-2: #68756d;
-    --accent-2-deep: #4c574f;
-    --sage: #a1a79e;
-    --sage-soft: #cbcfc8;
-    --blush: #decebf;
+    --paper: #f3f2ec;
+    --paper-2: #e6e5dd;
+    --white: #ffffff;
+    --ink: #0c0c0d;
+    --mute: #55554f;
+    --grey: #b7b6ad;
+    --hot: #ff4a00;
+    /* names the figures and banners already use */
+    --bg: var(--paper);
+    --bg-alt: var(--paper-2);
+    --card: var(--white);
+    --edge: var(--ink);
+    --muted: var(--mute);
+    --accent: var(--hot);
+    --accent-2: #3a3a36;
+    --accent-2-deep: var(--ink);
+    --sage: var(--grey);
+    --sage-soft: #d6d5cd;
+    --blush: #ffd3bf;
+    --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+    --max: 76rem;
+    --rule: 3px solid var(--ink);
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: radial-gradient(1100px 620px at 18% -8%, var(--bg-glow) 0%, var(--bg) 55%);
-    color: var(--ink);
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-    padding: 3rem 1.25rem 2.5rem;
-  }
-  main { max-width: 62rem; width: 100%; margin: 0 auto; }
-  h1 { font-size: 2rem; margin: 0 0 0.3rem; letter-spacing: -0.02em; color: var(--accent-2-deep); }
-  h2 { font-size: 1.25rem; margin: 3rem 0 0.25rem; color: var(--accent-2-deep); letter-spacing: -0.01em; }
-  h2 + p.lead { margin-bottom: 1.25rem; }
-  p.lead { color: var(--muted); margin: 0 0 1.1rem; max-width: 44rem; }
-  p.lead a, .links a, .case a { color: var(--accent); }
-  .role { font-size: 1.05rem; color: var(--accent); font-weight: 600; margin: 0 0 0.6rem; letter-spacing: 0.01em; }
-  .links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; margin: 0 0 1.4rem; font-size: 0.95rem; }
-  .links a { text-decoration: none; border-bottom: 1px solid var(--edge); }
-  .links a:hover { border-color: var(--accent); }
-  .accent-bar {
-    width: 11rem; height: 4px; border-radius: 999px; margin: 0 0 2.25rem;
-    background: linear-gradient(90deg, var(--accent-2) 0%, var(--sage) 55%, var(--accent) 100%);
-  }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: var(--gutter); }
+  .skip { position: absolute; left: -999px; top: 0; background: var(--hot); color: var(--ink); padding: 0.6rem 0.9rem; font: 600 0.8rem/1 var(--mono); z-index: 5; }
+  .skip:focus { left: 0; }
 
-  /* numbers strip */
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.9rem; margin: 0 0 2.25rem; }
-  .stat { background: var(--card); border: 1px solid var(--edge); border-radius: 12px; padding: 0.85rem 1rem; }
-  .stat b { display: block; font-size: 1.45rem; color: var(--accent-2-deep); letter-spacing: -0.02em; line-height: 1.1; }
-  .stat span { font-size: 0.8rem; color: var(--muted); }
+  /* system bar */
+  .bar { background: var(--ink); color: var(--paper); font: 500 0.7rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .bar .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem 1.5rem; padding-block: 0.7rem; }
+  .bar b { color: var(--hot); font-weight: 600; }
+  .bar .jp { letter-spacing: 0.2em; }
+
+  /* hero */
+  .hero { border-bottom: var(--rule); }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem); }
+  @media (min-width: 900px) { .hero .wrap { grid-template-columns: minmax(0, 1fr) 15rem; align-items: end; } }
+  h1 { margin: 0 0 0 -0.065em; font: 900 clamp(2.7rem, 11.2vw, 8.4rem)/0.84 var(--display); font-stretch: 118%; letter-spacing: -0.035em; text-transform: uppercase; }
+  h1 span { display: block; }
+  h1 .l2 { color: var(--hot); }
+  .role { display: inline-block; margin: 1.5rem 0 1.1rem; background: var(--ink); color: var(--paper); font: 600 0.78rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.55rem 0.8rem; }
+  .lead { max-width: 44rem; margin: 0 0 1.5rem; font-size: 1.06rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .btn { display: inline-flex; align-items: center; min-height: 2.75rem; font: 600 0.76rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 0.8rem 1rem; border: 2px solid var(--ink); color: var(--ink); background: transparent; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.primary { background: var(--hot); }
+  .btn.primary:hover { background: var(--ink); color: var(--hot); }
+  .mark { width: 100%; }
+  .mark svg { display: block; width: 100%; height: auto; }
+  @media (max-width: 899px) { .mark { width: 7.5rem; order: -1; } }
+
+  /* discipline strip */
+  .strip { background: var(--ink); color: var(--paper); overflow: hidden; }
+  .strip p { margin: 0; display: flex; flex-wrap: wrap; gap: 0.55rem 1.5rem; padding-block: 0.85rem; font: 800 clamp(0.7rem, 0.98vw, 0.84rem)/1 var(--display); font-stretch: 125%; letter-spacing: 0.05em; text-transform: uppercase; }
+  .strip span { display: inline-flex; align-items: center; gap: 0.55rem; white-space: nowrap; }
+  .strip span::before { content: ""; width: 0.55em; height: 0.55em; background: var(--hot); }
+
+  /* numbers */
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: var(--rule); border-left: 1px solid var(--ink); }
+  @media (min-width: 760px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .stat { padding: 1.3rem 1.1rem 1.2rem; border-right: 1px solid var(--ink); border-top: 1px solid var(--ink); margin-top: -1px; }
+  .stat b { display: block; margin-left: -0.04em; font: 900 clamp(2rem, 5.2vw, 3.5rem)/0.9 var(--display); font-stretch: 112%; letter-spacing: -0.03em; }
+  .stat span { display: block; margin-top: 0.55rem; font: 500 0.7rem/1.45 var(--mono); letter-spacing: 0.03em; text-transform: uppercase; color: var(--mute); }
+
+  /* section heads */
+  .sec { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 1rem; align-items: end; border-top: var(--rule); padding-top: 0.9rem; margin: clamp(3rem, 7vw, 5rem) 0 1.4rem; }
+  .sec .idx { margin-left: -0.05em; font: 900 clamp(2.4rem, 6.5vw, 4.4rem)/0.8 var(--display); font-stretch: 125%; letter-spacing: -0.04em; color: var(--hot); }
+  h2 { margin: 0; font: 900 clamp(1.5rem, 4.4vw, 3rem)/0.95 var(--display); font-stretch: 112%; letter-spacing: -0.02em; text-transform: uppercase; }
+  .sec .lead { grid-column: 1 / -1; margin: 0.9rem 0 0; font-size: 1rem; color: var(--mute); }
+
+  /* milestones */
+  .miles { list-style: none; margin: 0; padding: 0; border: 2px solid var(--ink); background: var(--ink); color: var(--paper); counter-reset: m; }
+  .miles li { counter-increment: m; display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0.4rem 1rem; align-items: baseline; padding: 0.95rem 1.2rem; border-top: 1px solid #3a3a36; font-size: 1rem; }
+  .miles li:first-child { border-top: 0; }
+  .miles li::before { content: counter(m, decimal-leading-zero); font: 800 1.15rem/1 var(--display); font-stretch: 125%; color: var(--hot); }
 
   /* case studies */
-  .cases { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-  .case {
-    display: grid; grid-template-columns: 1fr; gap: 0;
-    background: var(--card); border: 1px solid var(--edge); border-radius: 14px; overflow: hidden;
-    box-shadow: 0 1px 2px rgba(46, 39, 26, 0.06), 0 8px 20px -12px rgba(46, 39, 26, 0.28);
-  }
-  @media (min-width: 760px) { .case { grid-template-columns: 5fr 7fr; } }
-  .case-figure { background: linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%); border-bottom: 1px solid var(--edge); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; gap: 0.6rem; }
-  .fig-caption { margin: 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4; align-self: stretch; }
-  @media (min-width: 760px) { .case-figure { border-bottom: 0; border-right: 1px solid var(--edge); } }
-  .case-figure svg { width: 100%; height: auto; max-height: 260px; display: block; }
-  .case-body { padding: 1.1rem 1.25rem 1.2rem; }
-  .case h3 { margin: 0 0 0.15rem; font-size: 1.05rem; color: var(--accent-2-deep); }
-  .case .when { font-size: 0.8rem; color: var(--muted); margin: 0 0 0.6rem; }
-  .case p { margin: 0 0 0.6rem; font-size: 0.92rem; }
-  .case p:last-of-type { margin-bottom: 0.75rem; }
-  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tag {
-    font-size: 0.7rem; color: var(--accent-2-deep); background: var(--bg-alt);
-    border: 1px solid var(--edge); border-radius: 999px; padding: 0.15rem 0.55rem;
-  }
-  .fig-label { font: 600 11px/1.2 system-ui, sans-serif; fill: var(--accent-2-deep); }
-  .fig-small { font: 10px/1.2 system-ui, sans-serif; fill: var(--muted); }
-  .fig-num { font: 700 15px/1.1 system-ui, sans-serif; fill: var(--accent-2-deep); }
+  .cases { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .case { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); border: 2px solid var(--ink); background: var(--white); }
+  @media (min-width: 820px) { .case { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
+  .case::before { content: attr(data-n); position: absolute; top: -2px; right: -2px; background: var(--ink); color: var(--paper); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.1em; padding: 0.45rem 0.6rem; }
+  .case-figure { background-color: var(--paper-2); background-image: radial-gradient(var(--grey) 1px, transparent 1.2px); background-size: 14px 14px; border-bottom: 2px solid var(--ink); padding: 1.5rem 1.25rem 1.1rem; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; }
+  @media (min-width: 820px) { .case-figure { border-bottom: 0; border-right: 2px solid var(--ink); } }
+  .case-figure svg { width: 100%; height: auto; max-height: 270px; display: block; }
+  .case .fig-caption { margin: 0; font: 400 0.74rem/1.55 var(--mono); background: var(--paper-2); }
+  .case-body { padding: 1.5rem 1.5rem 1.4rem; }
+  .case h3 { margin: 0 2.6rem 0.4rem 0; font: 800 1.4rem/1.1 var(--display); font-stretch: 105%; letter-spacing: -0.01em; }
+  .case .when { margin: 0 0 0.9rem; font: 500 0.7rem/1.45 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+  .case p { margin: 0 0 0.75rem; font-size: 0.95rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem; }
+  .tag { font: 500 0.66rem/1 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; border: 1px solid var(--ink); background: var(--paper); padding: 0.3rem 0.45rem; }
+  .fig-label { font: 700 11px/1.2 var(--display); fill: var(--ink); }
+  .fig-small { font: 500 9.5px/1.2 var(--mono); fill: var(--mute); }
+  .fig-num { font: 800 15px/1.1 var(--display); fill: var(--ink); }
 
   /* earlier work and credentials */
-  .earlier { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-  .earlier div { background: var(--card); border: 1px solid var(--edge); border-radius: 12px; padding: 0.9rem 1rem; font-size: 0.9rem; }
-  .earlier b { color: var(--accent-2-deep); display: block; margin-bottom: 0.2rem; }
-  .earlier span { color: var(--muted); font-size: 0.8rem; display: block; margin-bottom: 0.35rem; }
+  .earlier { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border: 2px solid var(--ink); background: var(--white); overflow: hidden; }
+  .earlier div { padding: 1.1rem 1.2rem 1.2rem; font-size: 0.92rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin: 0 -1px -1px 0; }
+  .earlier b { display: block; font: 800 1.05rem/1.15 var(--display); }
+  .earlier span { display: block; margin: 0.35rem 0 0.55rem; font: 500 0.68rem/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
 
   /* personal projects */
-  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
-  a.card {
-    display: flex; flex-direction: column;
-    background: var(--card); border: 1px solid var(--edge); border-radius: 14px;
-    text-decoration: none; color: inherit; overflow: hidden;
-    box-shadow: 0 1px 2px rgba(46, 39, 26, 0.06), 0 8px 20px -12px rgba(46, 39, 26, 0.28);
-    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  a.card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 2px 4px rgba(46, 39, 26, 0.08), 0 14px 28px -14px rgba(176, 103, 78, 0.4); }
-  .card-banner { aspect-ratio: 16 / 8; background: linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%); display: block; overflow: hidden; }
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; counter-reset: p; }
+  a.card { counter-increment: p; position: relative; display: flex; flex-direction: column; border: 2px solid var(--ink); background: var(--white); text-decoration: none; color: inherit; transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  a.card:hover, a.card:focus-visible { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--hot); }
+  @media (prefers-reduced-motion: reduce) { a.card { transition: none; } a.card:hover, a.card:focus-visible { transform: none; } }
+  a.card::before { content: "P." counter(p, decimal-leading-zero); position: absolute; top: 0; left: 0; z-index: 1; background: var(--ink); color: var(--paper); font: 600 0.68rem/1 var(--mono); letter-spacing: 0.1em; padding: 0.45rem 0.6rem; }
+  .card-banner { aspect-ratio: 16 / 8; background: var(--paper-2); display: block; overflow: hidden; border-bottom: 2px solid var(--ink); }
   .card-banner svg, .card-banner img { width: 100%; height: 100%; display: block; object-fit: cover; }
-  .card-body { padding: 1rem 1.15rem 1.15rem; display: flex; flex-direction: column; flex: 1; }
-  .card .name { font-weight: 700; color: var(--accent-2-deep); font-size: 1.02rem; }
-  .card .desc { color: var(--muted); font-size: 0.88rem; margin-top: 0.35rem; flex: 1; }
-  .card .tags { margin-top: 0.75rem; }
+  .card-body { padding: 1.1rem 1.15rem 1.2rem; display: flex; flex-direction: column; flex: 1; }
+  .card .name { font: 800 1.25rem/1.1 var(--display); }
+  .card .desc { font-size: 0.9rem; margin-top: 0.45rem; flex: 1; }
+  .card .tags { margin-top: 0.9rem; }
 
-  footer { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
-  footer a { color: inherit; }
+  /* footer */
+  .foot { margin-top: clamp(3.5rem, 8vw, 6rem); background: var(--ink); color: var(--paper); }
+  .foot::before { content: ""; display: block; height: 14px; background: repeating-linear-gradient(-45deg, var(--hot) 0 14px, var(--ink) 14px 28px); }
+  .foot .wrap { display: grid; gap: 1.2rem; padding-block: 2.2rem 2.4rem; }
+  .foot .big { margin: 0 0 0 -0.04em; font: 900 clamp(1.8rem, 7vw, 5rem)/0.9 var(--display); font-stretch: 118%; letter-spacing: -0.03em; text-transform: uppercase; }
+  .foot .big em { font-style: normal; color: var(--hot); }
+  .foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; font: 500 0.78rem/1.4 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
+  .foot a { text-decoration-color: var(--hot); text-underline-offset: 0.25em; }
 </style>
 </head>
 <body>
-<main>
-  <h1>Brandon Knieriem</h1>
-  <p class="role">Systems Architect and Principal Engineer</p>
-  <p class="lead">Eight years building and owning production systems, the last nearly six as the sole engineer and technical lead on OASIS, the student advising and records platform at UC Davis. I design the architecture and build it, from integrations and data model through to interface, and I set the standards and tooling the rest of the team works within.</p>
-  <div class="links">
-    <a href="assets/docs/Knieriem, Brandon - Resume.pdf">Resume (PDF)</a>
-    <a href="https://github.com/bknie1">GitHub</a>
-    <a href="mailto:brandonknieriem26@gmail.com">brandonknieriem26@gmail.com</a>
-    <a href="#projects">Personal projects</a>
+<a class="skip" href="#work">Skip to the work</a>
+
+<div class="bar">
+  <div class="wrap">
+    <span><b>BK-SYS</b> / Portfolio 2026</span>
+    <span class="jp" lang="ja" aria-hidden="true">システム / デザイン / エンジニアリング</span>
+    <span>Sacramento, CA / Relocating: Bay Area, Seattle, Los Angeles</span>
   </div>
-  <div class="accent-bar"></div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1><span>Brandon</span><span class="l2">Knieriem</span></h1>
+      <p class="role">Systems Architect + Principal Engineer</p>
+      <p class="lead">Eight years building and owning production systems, the last nearly six as the sole engineer and technical lead on OASIS, the student advising and records platform at UC Davis. I design the architecture and build it, from integrations and data model through to interface, and I set the standards and tooling the rest of the team works within. I am usually the person who writes the thing nobody knows how to write yet.</p>
+      <div class="links">
+        <a class="btn primary" href="assets/docs/Knieriem, Brandon - Resume.pdf">Resume PDF</a>
+        <a class="btn" href="mailto:brandonknieriem26@gmail.com">Email</a>
+        <a class="btn" href="https://github.com/bknie1">GitHub</a>
+        <a class="btn" href="#work">Work</a>
+        <a class="btn" href="#projects">Projects</a>
+      </div>
+    </div>
+    <div class="mark">
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <rect width="240" height="240" rx="26" fill="#0c0c0d"/>
+        <circle cx="156" cy="98" r="66" fill="#ff4a00"/>
+        <circle cx="156" cy="98" r="84" fill="none" stroke="#f3f2ec" stroke-width="1.5" stroke-dasharray="2 7"/>
+        <g fill="#f3f2ec">
+          <rect x="36" y="54" width="22" height="92"/>
+          <path d="M58 54h16a23 23 0 0 1 0 46H58z"/>
+          <path d="M58 100h20a23 23 0 0 1 0 46H58z"/>
+          <rect x="112" y="54" width="22" height="92"/>
+          <polygon points="134,100 160,54 188,54 152,110"/>
+          <polygon points="144,98 188,146 160,146 134,116"/>
+        </g>
+        <g fill="#0c0c0d"><rect x="58" y="68" width="14" height="18" rx="7"/><rect x="58" y="114" width="18" height="18" rx="7"/></g>
+        <g fill="#f3f2ec">
+          <rect x="36" y="176" width="3" height="28"/><rect x="43" y="176" width="7" height="28"/><rect x="54" y="176" width="2" height="28"/>
+          <rect x="60" y="176" width="5" height="28"/><rect x="69" y="176" width="2" height="28"/><rect x="75" y="176" width="9" height="28"/>
+          <rect x="88" y="176" width="3" height="28"/><rect x="95" y="176" width="6" height="28"/><rect x="105" y="176" width="2" height="28"/>
+        </g>
+        <text x="204" y="190" text-anchor="end" fill="#f3f2ec" style="font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em">BK-SYS</text>
+        <text x="204" y="204" text-anchor="end" fill="#ff4a00" style="font:600 11px 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em">EST 2018</text>
+        <path d="M22 22h14M29 15v14" stroke="#f3f2ec" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="wrap"><p><span>Full stack</span><span>Design systems</span><span>Accessibility</span><span>Integration architecture</span><span>C# and .NET</span><span>SQL Server</span><span>Rust</span></p></div>
+</div>
+
+<main>
+<div class="wrap">
 
   <div class="stats" aria-label="Scope of the platform">
     <div class="stat"><b>39,414</b><span>students on the campus the platform serves</span></div>
@@ -124,21 +209,36 @@
     <div class="stat"><b>1,343</b><span>tracked items shipped across 40 sprints, four product areas</span></div>
   </div>
 
-  <h2 id="work">Professional work</h2>
-  <p class="lead">Case studies from OASIS. The code and screens are internal to UC Davis, so student data and internal system details are left out; the architecture and the numbers are real.</p>
+  <div class="sec">
+    <span class="idx" aria-hidden="true">01</span>
+    <h2 id="milestones">Milestones</h2>
+  </div>
+  <ol class="miles">
+    <li>Own the student records platform where a wrong answer decides whether a student graduates; replaced a decade of legacy audit logic.</li>
+    <li>Built a design system that is accessible by construction; the in-house WCAG audit last ran clean on all 167 pages.</li>
+    <li>Measured my team's delivery with Lorenz curves and Gini coefficients, then fixed it: estimation coverage from 24 to 100 percent.</li>
+    <li>Built PRISM, a dependency-free image format in Rust that compresses to 34.0 percent of raw, against PNG at 35.9.</li>
+    <li>First author on a peer-reviewed Springer paper.</li>
+  </ol>
+
+  <div class="sec">
+    <span class="idx" aria-hidden="true">02</span>
+    <h2 id="work">Professional work</h2>
+    <p class="lead">Case studies from OASIS. The code and screens are internal to UC Davis, so student data and internal system details are left out; the architecture and the numbers are real.</p>
+  </div>
 
   <div class="cases">
 
-    <article class="case">
+    <article class="case" data-n="C.01">
       <div class="case-figure">
         <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five institutional systems connected to the student records platform at the center">
-          <g stroke="var(--sage)" stroke-width="2" fill="none">
+          <g stroke="var(--hot)" stroke-width="2" fill="none">
             <line x1="180" y1="115" x2="70" y2="40"/><line x1="180" y1="115" x2="290" y2="40"/>
             <line x1="180" y1="115" x2="40" y2="150"/><line x1="180" y1="115" x2="320" y2="150"/>
             <line x1="180" y1="115" x2="180" y2="205"/>
           </g>
           <g>
-            <rect x="120" y="88" width="120" height="54" rx="12" fill="var(--accent)" />
+            <rect x="120" y="88" width="120" height="54" rx="12" fill="var(--ink)" />
             <text x="180" y="111" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">Student records</text>
             <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">C# and SQL Server</text>
           </g>
@@ -171,21 +271,21 @@
       </div>
     </article>
 
-    <article class="case">
+    <article class="case" data-n="C.02">
       <div class="case-figure">
         <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Requirement decisions roll up to an overall decision, which sends a notification; every step is written to an append-only decision history">
           <g fill="var(--card)" stroke="var(--edge)">
             <rect x="10" y="30" width="104" height="60" rx="10"/>
             <rect x="246" y="30" width="104" height="60" rx="10"/>
           </g>
-          <rect x="128" y="30" width="104" height="60" rx="12" fill="var(--accent)"/>
+          <rect x="128" y="30" width="104" height="60" rx="12" fill="var(--ink)"/>
           <text x="62" y="56" text-anchor="middle" class="fig-label">Requirement</text>
           <text x="62" y="72" text-anchor="middle" class="fig-small">decisions, scoped</text>
           <text x="180" y="56" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">Overall decision</text>
           <text x="180" y="72" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">state model</text>
           <text x="298" y="56" text-anchor="middle" class="fig-label">Notification</text>
           <text x="298" y="72" text-anchor="middle" class="fig-small">college templates</text>
-          <g stroke="var(--sage)" stroke-width="2" fill="none">
+          <g stroke="var(--hot)" stroke-width="2" fill="none">
             <line x1="114" y1="60" x2="128" y2="60"/><line x1="232" y1="60" x2="246" y2="60"/>
             <line x1="62" y1="90" x2="62" y2="138"/><line x1="180" y1="90" x2="180" y2="138"/><line x1="298" y1="90" x2="298" y2="138"/>
           </g>
@@ -205,7 +305,7 @@
       </div>
     </article>
 
-    <article class="case">
+    <article class="case" data-n="C.03">
       <div class="case-figure">
         <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart: pages passing the in-house WCAG audit rose from 88 of 171 to 167 of 167 across the redesign">
           <text x="18" y="22" class="fig-label">Pages clean in the in-house WCAG audit</text>
@@ -223,7 +323,7 @@
           </g>
           <g>
             <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
-            <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--accent)"/>
+            <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--ink)"/>
             <text x="26" y="146" class="fig-small" style="fill:#fbf6ee">jQuery-free build, reflow clean</text>
             <text x="318" y="146" text-anchor="end" class="fig-num" style="font-size:12px;fill:#fbf6ee">167 of 167</text>
           </g>
@@ -240,14 +340,14 @@
       </div>
     </article>
 
-    <article class="case">
+    <article class="case" data-n="C.04">
       <div class="case-figure">
         <svg viewBox="0 0 360 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A kiosk client and an analytics consumer call a faceless REST API, which calls stored procedures; every request is written to an audit log">
           <g fill="var(--card)" stroke="var(--edge)">
             <rect x="12" y="30" width="110" height="52" rx="10"/><rect x="12" y="140" width="110" height="52" rx="10"/>
             <rect x="238" y="80" width="110" height="64" rx="10"/>
           </g>
-          <rect x="130" y="68" width="100" height="88" rx="12" fill="var(--accent)"/>
+          <rect x="130" y="68" width="100" height="88" rx="12" fill="var(--ink)"/>
           <text x="67" y="52" text-anchor="middle" class="fig-label">Check-in kiosk</text>
           <text x="67" y="68" text-anchor="middle" class="fig-small">.NET MAUI, Blazor</text>
           <text x="67" y="162" text-anchor="middle" class="fig-label">Advising metrics</text>
@@ -259,7 +359,7 @@
           <text x="293" y="104" text-anchor="middle" class="fig-label">Stored procedures</text>
           <text x="293" y="120" text-anchor="middle" class="fig-small">SQL Server</text>
           <text x="293" y="134" text-anchor="middle" class="fig-small">no PII in URLs</text>
-          <g stroke="var(--sage)" stroke-width="2" fill="none">
+          <g stroke="var(--hot)" stroke-width="2" fill="none">
             <path d="M122 56 L130 56 L130 90"/><path d="M122 166 L130 166 L130 134"/><line x1="230" y1="112" x2="238" y2="112"/>
           </g>
           </svg>
@@ -274,14 +374,14 @@
       </div>
     </article>
 
-    <article class="case">
+    <article class="case" data-n="C.05">
       <div class="case-figure">
         <svg viewBox="0 0 360 172" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two paired bars: estimation coverage rose from 24 percent to 100 percent; workload concentration fell from a Gini of 0.64 to 0.25">
           <text x="18" y="22" class="fig-label">Estimation coverage</text>
           <rect x="18" y="32" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
           <rect x="18" y="32" width="72" height="18" rx="5" fill="var(--sage)"/>
           <text x="98" y="46" class="fig-small">24% before</text>
-          <rect x="18" y="56" width="300" height="18" rx="5" fill="var(--accent)"/>
+          <rect x="18" y="56" width="300" height="18" rx="5" fill="var(--ink)"/>
           <text x="312" y="70" text-anchor="end" class="fig-small" style="fill:#fbf6ee">100% after</text>
 
           <text x="18" y="108" class="fig-label">Workload concentration, Gini coefficient</text>
@@ -289,7 +389,7 @@
           <rect x="18" y="118" width="193" height="18" rx="5" fill="var(--sage)"/>
           <text x="218" y="132" class="fig-small">0.64 before</text>
           <rect x="18" y="142" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
-          <rect x="18" y="142" width="75" height="18" rx="5" fill="var(--accent)"/>
+          <rect x="18" y="142" width="75" height="18" rx="5" fill="var(--ink)"/>
           <text x="100" y="156" class="fig-small">0.25 after</text>
 
           </svg>
@@ -306,7 +406,10 @@
 
   </div>
 
-  <h2>Earlier work and credentials</h2>
+  <div class="sec">
+    <span class="idx" aria-hidden="true">03</span>
+    <h2 id="earlier">Earlier work and credentials</h2>
+  </div>
   <div class="earlier">
     <div><b>California Secretary of State</b><span>EAM Software Consulting, 2020 to 2021</span>Front end lead. Rebuilt the voter registration flow with state staff and fixed several hundred accessibility and usability defects across screen reader behavior and navigation.</div>
     <div><b>AthleteReg</b><span>2018 to 2020, acquired by Outside</span>Two-year mobile-first redesign of athletereg.com and its sport portals. Built the company's first style guide and component library, wrote 70+ automated visual regression and browser tests.</div>
@@ -314,8 +417,11 @@
     <div><b>Education</b><span>University of New Haven; Eastern Connecticut State University</span>MS Computer Science and MS Criminal Justice, both concentrated in Digital Forensics and Security. BA Sociology. CPUX-F, Lean Six Sigma Green Belt, UC Davis People Management Certificate.</div>
   </div>
 
-  <h2 id="projects">Personal projects</h2>
-  <p class="lead">Built on my own time, live and in progress. The same instinct as the work above: write the spec, then the thing nobody knows how to write yet.</p>
+  <div class="sec">
+    <span class="idx" aria-hidden="true">04</span>
+    <h2 id="projects">Personal projects</h2>
+    <p class="lead">Built on my own time, live and in progress. The same instinct as the work above: write the spec, then the thing nobody knows how to write yet.</p>
+  </div>
 
   <div class="projects">
 
@@ -438,9 +544,19 @@
 
   </div>
 
-  <footer>
-    <a href="https://github.com/bknie1">github.com/bknie1</a> &middot; <a href="mailto:brandonknieriem26@gmail.com">brandonknieriem26@gmail.com</a> &middot; Sacramento, CA, relocating.
-  </footer>
+</div>
 </main>
+
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <p class="big">Let's <em>talk.</em></p>
+    <ul>
+      <li><a href="mailto:brandonknieriem26@gmail.com">brandonknieriem26@gmail.com</a></li>
+      <li><a href="https://github.com/bknie1">github.com/bknie1</a></li>
+      <li><a href="assets/docs/Knieriem, Brandon - Resume.pdf">Resume PDF</a></li>
+      <li>Sacramento, CA, relocating</li>
+    </ul>
+  </div>
+</footer>
 </body>
 </html>
