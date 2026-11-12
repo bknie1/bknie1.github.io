@@ -4,10 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Brandon Knieriem</title>
+<meta name="description" content="Brandon Knieriem, systems architect and principal engineer. Student systems, design systems, and the integrations between them.">
 <style>
   :root {
-    /* the earthy sage palette from Brandon's resume, applied a shade cozier:
-       a warm sand backdrop so the paper-white cards actually lift off it */
     --bg: #e6dbc8;
     --bg-glow: #f2e6d2;
     --bg-alt: #f0e6d5;
@@ -33,63 +32,290 @@
   }
   main { max-width: 62rem; width: 100%; margin: 0 auto; }
   h1 { font-size: 2rem; margin: 0 0 0.3rem; letter-spacing: -0.02em; color: var(--accent-2-deep); }
-  p.lead { color: var(--muted); margin: 0 0 1.1rem; max-width: 38rem; }
-  p.lead a { color: var(--accent); }
+  h2 { font-size: 1.25rem; margin: 3rem 0 0.25rem; color: var(--accent-2-deep); letter-spacing: -0.01em; }
+  h2 + p.lead { margin-bottom: 1.25rem; }
+  p.lead { color: var(--muted); margin: 0 0 1.1rem; max-width: 44rem; }
+  p.lead a, .links a, .case a { color: var(--accent); }
+  .role { font-size: 1.05rem; color: var(--accent); font-weight: 600; margin: 0 0 0.6rem; letter-spacing: 0.01em; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; margin: 0 0 1.4rem; font-size: 0.95rem; }
+  .links a { text-decoration: none; border-bottom: 1px solid var(--edge); }
+  .links a:hover { border-color: var(--accent); }
   .accent-bar {
     width: 11rem; height: 4px; border-radius: 999px; margin: 0 0 2.25rem;
     background: linear-gradient(90deg, var(--accent-2) 0%, var(--sage) 55%, var(--accent) 100%);
   }
 
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.25rem;
-  }
-  a.card {
-    display: flex;
-    flex-direction: column;
-    background: var(--card);
-    border: 1px solid var(--edge);
-    border-radius: 14px;
-    text-decoration: none;
-    color: inherit;
-    overflow: hidden;
+  /* numbers strip */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.9rem; margin: 0 0 2.25rem; }
+  .stat { background: var(--card); border: 1px solid var(--edge); border-radius: 12px; padding: 0.85rem 1rem; }
+  .stat b { display: block; font-size: 1.45rem; color: var(--accent-2-deep); letter-spacing: -0.02em; line-height: 1.1; }
+  .stat span { font-size: 0.8rem; color: var(--muted); }
+
+  /* case studies */
+  .cases { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .case {
+    display: grid; grid-template-columns: 1fr; gap: 0;
+    background: var(--card); border: 1px solid var(--edge); border-radius: 14px; overflow: hidden;
     box-shadow: 0 1px 2px rgba(46, 39, 26, 0.06), 0 8px 20px -12px rgba(46, 39, 26, 0.28);
-    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   }
-  a.card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 2px 4px rgba(46, 39, 26, 0.08), 0 14px 28px -14px rgba(176, 103, 78, 0.4);
-  }
-  .card-banner {
-    aspect-ratio: 16 / 8;
-    background: linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%);
-    display: block;
-    overflow: hidden;
-  }
-  .card-banner svg, .card-banner img {
-    width: 100%; height: 100%; display: block; object-fit: cover;
-  }
-  .card-body { padding: 1rem 1.15rem 1.15rem; display: flex; flex-direction: column; flex: 1; }
-  .card .name { font-weight: 700; color: var(--accent-2-deep); font-size: 1.02rem; }
-  .card .desc { color: var(--muted); font-size: 0.88rem; margin-top: 0.35rem; flex: 1; }
-  .card .tags { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .card .tag {
+  @media (min-width: 760px) { .case { grid-template-columns: 5fr 7fr; } }
+  .case-figure { background: linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%); border-bottom: 1px solid var(--edge); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; gap: 0.6rem; }
+  .fig-caption { margin: 0; font-size: 0.78rem; color: var(--muted); line-height: 1.4; align-self: stretch; }
+  @media (min-width: 760px) { .case-figure { border-bottom: 0; border-right: 1px solid var(--edge); } }
+  .case-figure svg { width: 100%; height: auto; max-height: 260px; display: block; }
+  .case-body { padding: 1.1rem 1.25rem 1.2rem; }
+  .case h3 { margin: 0 0 0.15rem; font-size: 1.05rem; color: var(--accent-2-deep); }
+  .case .when { font-size: 0.8rem; color: var(--muted); margin: 0 0 0.6rem; }
+  .case p { margin: 0 0 0.6rem; font-size: 0.92rem; }
+  .case p:last-of-type { margin-bottom: 0.75rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
     font-size: 0.7rem; color: var(--accent-2-deep); background: var(--bg-alt);
     border: 1px solid var(--edge); border-radius: 999px; padding: 0.15rem 0.55rem;
   }
+  .fig-label { font: 600 11px/1.2 system-ui, sans-serif; fill: var(--accent-2-deep); }
+  .fig-small { font: 10px/1.2 system-ui, sans-serif; fill: var(--muted); }
+  .fig-num { font: 700 15px/1.1 system-ui, sans-serif; fill: var(--accent-2-deep); }
 
-  p.footnote { color: var(--muted); margin-top: 2.5rem; }
-  footer { margin-top: 1.5rem; color: var(--muted); font-size: 0.85rem; }
+  /* earlier work and credentials */
+  .earlier { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .earlier div { background: var(--card); border: 1px solid var(--edge); border-radius: 12px; padding: 0.9rem 1rem; font-size: 0.9rem; }
+  .earlier b { color: var(--accent-2-deep); display: block; margin-bottom: 0.2rem; }
+  .earlier span { color: var(--muted); font-size: 0.8rem; display: block; margin-bottom: 0.35rem; }
+
+  /* personal projects */
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+  a.card {
+    display: flex; flex-direction: column;
+    background: var(--card); border: 1px solid var(--edge); border-radius: 14px;
+    text-decoration: none; color: inherit; overflow: hidden;
+    box-shadow: 0 1px 2px rgba(46, 39, 26, 0.06), 0 8px 20px -12px rgba(46, 39, 26, 0.28);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  a.card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 2px 4px rgba(46, 39, 26, 0.08), 0 14px 28px -14px rgba(176, 103, 78, 0.4); }
+  .card-banner { aspect-ratio: 16 / 8; background: linear-gradient(160deg, var(--bg-alt) 0%, var(--card) 100%); display: block; overflow: hidden; }
+  .card-banner svg, .card-banner img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .card-body { padding: 1rem 1.15rem 1.15rem; display: flex; flex-direction: column; flex: 1; }
+  .card .name { font-weight: 700; color: var(--accent-2-deep); font-size: 1.02rem; }
+  .card .desc { color: var(--muted); font-size: 0.88rem; margin-top: 0.35rem; flex: 1; }
+  .card .tags { margin-top: 0.75rem; }
+
+  footer { margin-top: 2.5rem; color: var(--muted); font-size: 0.85rem; }
   footer a { color: inherit; }
 </style>
 </head>
 <body>
 <main>
   <h1>Brandon Knieriem</h1>
-  <p class="lead">Personal projects, live and in progress.</p>
+  <p class="role">Systems Architect and Principal Engineer</p>
+  <p class="lead">Eight years building and owning production systems, the last nearly six as the sole engineer and technical lead on OASIS, the student advising and records platform at UC Davis. I design the architecture and build it, from integrations and data model through to interface, and I set the standards and tooling the rest of the team works within.</p>
+  <div class="links">
+    <a href="assets/docs/Knieriem, Brandon - Resume.pdf">Resume (PDF)</a>
+    <a href="https://github.com/bknie1">GitHub</a>
+    <a href="mailto:brandonknieriem26@gmail.com">brandonknieriem26@gmail.com</a>
+    <a href="#projects">Personal projects</a>
+  </div>
   <div class="accent-bar"></div>
+
+  <div class="stats" aria-label="Scope of the platform">
+    <div class="stat"><b>39,414</b><span>students on the campus the platform serves</span></div>
+    <div class="stat"><b>814</b><span>staff and faculty users across 25 permission roles</span></div>
+    <div class="stat"><b>8</b><span>repositories, one engineer, five institutional systems integrated</span></div>
+    <div class="stat"><b>1,343</b><span>tracked items shipped across 40 sprints, four product areas</span></div>
+  </div>
+
+  <h2 id="work">Professional work</h2>
+  <p class="lead">Case studies from OASIS. The code and screens are internal to UC Davis, so student data and internal system details are left out; the architecture and the numbers are real.</p>
+
+  <div class="cases">
+
+    <article class="case">
+      <div class="case-figure">
+        <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five institutional systems connected to the student records platform at the center">
+          <g stroke="var(--sage)" stroke-width="2" fill="none">
+            <line x1="180" y1="115" x2="70" y2="40"/><line x1="180" y1="115" x2="290" y2="40"/>
+            <line x1="180" y1="115" x2="40" y2="150"/><line x1="180" y1="115" x2="320" y2="150"/>
+            <line x1="180" y1="115" x2="180" y2="205"/>
+          </g>
+          <g>
+            <rect x="120" y="88" width="120" height="54" rx="12" fill="var(--accent)" />
+            <text x="180" y="111" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">Student records</text>
+            <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">C# and SQL Server</text>
+          </g>
+          <g fill="var(--card)" stroke="var(--edge)">
+            <rect x="14" y="18" width="112" height="44" rx="10"/><rect x="234" y="18" width="112" height="44" rx="10"/>
+            <rect x="2" y="128" width="100" height="44" rx="10"/><rect x="258" y="128" width="100" height="44" rx="10"/>
+            <rect x="118" y="186" width="124" height="40" rx="10"/>
+          </g>
+          <text x="70" y="36" text-anchor="middle" class="fig-label">Degree audit</text>
+          <text x="70" y="51" text-anchor="middle" class="fig-small">third party</text>
+          <text x="290" y="36" text-anchor="middle" class="fig-label">Banner SIS</text>
+          <text x="290" y="51" text-anchor="middle" class="fig-small">third party</text>
+          <text x="52" y="146" text-anchor="middle" class="fig-label">Messaging</text>
+          <text x="52" y="161" text-anchor="middle" class="fig-small">notices, email</text>
+          <text x="308" y="146" text-anchor="middle" class="fig-label">Work tracking</text>
+          <text x="308" y="161" text-anchor="middle" class="fig-small">two-way sync</text>
+          <text x="180" y="203" text-anchor="middle" class="fig-label">Incident management</text>
+          <text x="180" y="218" text-anchor="middle" class="fig-small">REST, scoped account</text>
+        </svg>
+        <p class="fig-caption">Five institutional systems, two of them third-party with no cooperation available. Authentication, access scoping, failure handling, and loop prevention on the two-way sync are designed once and reused.</p>
+      </div>
+      <div class="case-body">
+        <h3>OASIS: a student records platform, owned end to end</h3>
+        <p class="when">UC Davis, 2021 to present. Sole full-time engineer and technical lead.</p>
+        <p>Degree audit, degree certification, academic petitions, student records, and advising workflows for every undergraduate college. Degree certification decides whether a student graduates, so the correctness bar is absolute.</p>
+        <p>I designed the integration architecture across five institutional systems, two of them third-party with no cooperation available, covering authentication and access scoping, data governance for student PII, failure handling, and loop prevention on bidirectional sync. Sensitive student data sits behind a deliberate break-the-glass step, built to meet the university's security mandate and accepted by advisors once they heard why.</p>
+        <p>The first thing an advisor sees about a student is a panel I shaped with designated stakeholders from each college. Badges generated from criteria such as college, program, student status, and alerts lead to reports of every student who meets the same criteria, so a glance at one student becomes a path to the others like them.</p>
+        <p>Three years of that work delivered the Graduation Application, the Change of Program Petition, two exception petitions, and Degree Certification, directly with the University Registrar and the directors of each college. Technical direction for 14 contributors; mentees now at Google, Deloitte, and Chewy.</p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">SQL Server</span><span class="tag">Ellucian Banner</span><span class="tag">REST</span><span class="tag">Azure DevOps</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-figure">
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Requirement decisions roll up to an overall decision, which sends a notification; every step is written to an append-only decision history">
+          <g fill="var(--card)" stroke="var(--edge)">
+            <rect x="10" y="30" width="104" height="60" rx="10"/>
+            <rect x="246" y="30" width="104" height="60" rx="10"/>
+          </g>
+          <rect x="128" y="30" width="104" height="60" rx="12" fill="var(--accent)"/>
+          <text x="62" y="56" text-anchor="middle" class="fig-label">Requirement</text>
+          <text x="62" y="72" text-anchor="middle" class="fig-small">decisions, scoped</text>
+          <text x="180" y="56" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">Overall decision</text>
+          <text x="180" y="72" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">state model</text>
+          <text x="298" y="56" text-anchor="middle" class="fig-label">Notification</text>
+          <text x="298" y="72" text-anchor="middle" class="fig-small">college templates</text>
+          <g stroke="var(--sage)" stroke-width="2" fill="none">
+            <line x1="114" y1="60" x2="128" y2="60"/><line x1="232" y1="60" x2="246" y2="60"/>
+            <line x1="62" y1="90" x2="62" y2="138"/><line x1="180" y1="90" x2="180" y2="138"/><line x1="298" y1="90" x2="298" y2="138"/>
+          </g>
+          <rect x="10" y="138" width="340" height="44" rx="10" fill="var(--bg-alt)" stroke="var(--edge)"/>
+          <text x="180" y="158" text-anchor="middle" class="fig-label">Append-only decision history</text>
+          <text x="180" y="173" text-anchor="middle" class="fig-small">who decided what, and when</text>
+        </svg>
+        <p class="fig-caption">Persistence on one side, domain reasoning on the other. Every decision is attributable and stays explainable.</p>
+      </div>
+      <div class="case-body">
+        <h3>Degree certification, rebuilt on a domain layer</h3>
+        <p class="when">UC Davis. The decision that settles whether a student graduates.</p>
+        <p>Degree certification is where a college decides, requirement by requirement, whether a student has earned the degree. A wrong or late answer means a student does not graduate on time, so every decision has to be attributable and explainable.</p>
+        <p>I replaced a decade of legacy audit logic with a two-layer C# domain that separates persistence from domain reasoning. It carries a decision state model, authorization scoped to the requirement, an event-driven notification service, and an append-only SQL history of every decision. Each college writes and manages its own notification templates without me.</p>
+        <p>The interface is assembled from the design system's controls: a certification summary, a decision card for each requirement, and the message history alongside.</p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">SQL Server</span><span class="tag">Domain model</span><span class="tag">Authorization</span><span class="tag">Notifications</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-figure">
+        <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart: pages passing the in-house WCAG audit rose from 88 of 171 to 167 of 167 across the redesign">
+          <text x="18" y="22" class="fig-label">Pages clean in the in-house WCAG audit</text>
+          <g>
+            <rect x="18" y="44" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
+            <rect x="18" y="44" width="154" height="26" rx="6" fill="var(--sage)"/>
+            <text x="26" y="62" class="fig-small" style="fill:#2e322f">before the pass</text>
+            <text x="318" y="62" text-anchor="end" class="fig-num" style="font-size:12px">88 of 171</text>
+          </g>
+          <g>
+            <rect x="18" y="86" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
+            <rect x="18" y="86" width="277" height="26" rx="6" fill="var(--accent-2)"/>
+            <text x="26" y="104" class="fig-small" style="fill:#fbf6ee">after the first night</text>
+            <text x="318" y="104" text-anchor="end" class="fig-num" style="font-size:12px">156 of 169</text>
+          </g>
+          <g>
+            <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--bg-alt)" stroke="var(--edge)"/>
+            <rect x="18" y="128" width="300" height="26" rx="6" fill="var(--accent)"/>
+            <text x="26" y="146" class="fig-small" style="fill:#fbf6ee">jQuery-free build, reflow clean</text>
+            <text x="318" y="146" text-anchor="end" class="fig-num" style="font-size:12px;fill:#fbf6ee">167 of 167</text>
+          </g>
+          </svg>
+        <p class="fig-caption">One shell on about 170 pages, Bootstrap and jQuery removed, token-based dark mode, brand color ramps from the university guide. The audit runs as a script inside the site: standards at 1366px, reflow at 320px.</p>
+      </div>
+      <div class="case-body">
+        <h3>A design system, then a site-wide redesign onto it</h3>
+        <p class="when">2025 to 2026. In user acceptance testing across the colleges ahead of release to 814 faculty and staff.</p>
+        <p>Modular Sass on BEMIT with sub-module imports, paired with a server control library that emits WCAG 2.2 AA conformant markup by construction, so accessibility is a property of the components rather than a review step. A Blazor component library renders the same system for .NET MAUI clients.</p>
+        <p>The redesign put one shell on about 170 pages, removed Bootstrap and jQuery entirely, applied the campus brand guide, and added a token-based dark mode that follows the device. I wrote the in-house WCAG audit that crawls every page for standards and 320px reflow; the last run was clean on all 167 pages. The work is measured against UC's IT accessibility policy, WCAG 2.1 AA.</p>
+        <p>I do the user research and interface design myself and hold a CPUX-F certification. Earlier: the California Secretary of State's voter registration flow, rebuilt with state staff and audited for screen readers.</p>
+        <div class="tags"><span class="tag">Sass</span><span class="tag">BEMIT</span><span class="tag">WCAG 2.2 AA</span><span class="tag">ES6 modules</span><span class="tag">Blazor</span><span class="tag">Figma</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-figure">
+        <svg viewBox="0 0 360 205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A kiosk client and an analytics consumer call a faceless REST API, which calls stored procedures; every request is written to an audit log">
+          <g fill="var(--card)" stroke="var(--edge)">
+            <rect x="12" y="30" width="110" height="52" rx="10"/><rect x="12" y="140" width="110" height="52" rx="10"/>
+            <rect x="238" y="80" width="110" height="64" rx="10"/>
+          </g>
+          <rect x="130" y="68" width="100" height="88" rx="12" fill="var(--accent)"/>
+          <text x="67" y="52" text-anchor="middle" class="fig-label">Check-in kiosk</text>
+          <text x="67" y="68" text-anchor="middle" class="fig-small">.NET MAUI, Blazor</text>
+          <text x="67" y="162" text-anchor="middle" class="fig-label">Advising metrics</text>
+          <text x="67" y="178" text-anchor="middle" class="fig-small">aggregate, per-advisor</text>
+          <text x="180" y="96" text-anchor="middle" class="fig-label" style="fill:#fbf6ee">REST API</text>
+          <text x="180" y="112" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">ASP.NET Core</text>
+          <text x="180" y="127" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">hashed keys, scopes</text>
+          <text x="180" y="142" text-anchor="middle" class="fig-small" style="fill:#fbf6ee">request audit log</text>
+          <text x="293" y="104" text-anchor="middle" class="fig-label">Stored procedures</text>
+          <text x="293" y="120" text-anchor="middle" class="fig-small">SQL Server</text>
+          <text x="293" y="134" text-anchor="middle" class="fig-small">no PII in URLs</text>
+          <g stroke="var(--sage)" stroke-width="2" fill="none">
+            <path d="M122 56 L130 56 L130 90"/><path d="M122 166 L130 166 L130 134"/><line x1="230" y1="112" x2="238" y2="112"/>
+          </g>
+          </svg>
+        <p class="fig-caption">Prototype. Per-client hashed keys now, Entra ID client credentials planned for production; no student identifiers in URLs.</p>
+      </div>
+      <div class="case-body">
+        <h3>A faceless API, and the first client that needs no web page</h3>
+        <p class="when">2026. Prototype.</p>
+        <p>A REST service on ASP.NET Core that lets other systems use the platform's data without touching the web application: per-client hashed keys with scoped roles, Entra ID client credentials planned for production, and every request written to an audit log. The first consumers are advising metrics and an appointment check-in kiosk built in .NET MAUI on the Blazor component library, so a kiosk looks like the rest of the platform without a second copy of the design system.</p>
+        <p>The same month I wrote the unit's build-or-buy analysis for a two-way sync between the campus incident system and the team's work tracking: every commercial option cost money, routed student data through a vendor cloud, or needed an install in a system we do not control, so the recommendation was an in-house job over the two REST APIs at no new spending. The report also proposed the unit's AI architecture: a locally hosted model behind a compartmentalized service so student data stays in the environment, with AI used at build time to produce deterministic code and rules.</p>
+        <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">.NET MAUI</span><span class="tag">Blazor</span><span class="tag">REST</span><span class="tag">Entra ID</span></div>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="case-figure">
+        <svg viewBox="0 0 360 172" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two paired bars: estimation coverage rose from 24 percent to 100 percent; workload concentration fell from a Gini of 0.64 to 0.25">
+          <text x="18" y="22" class="fig-label">Estimation coverage</text>
+          <rect x="18" y="32" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
+          <rect x="18" y="32" width="72" height="18" rx="5" fill="var(--sage)"/>
+          <text x="98" y="46" class="fig-small">24% before</text>
+          <rect x="18" y="56" width="300" height="18" rx="5" fill="var(--accent)"/>
+          <text x="312" y="70" text-anchor="end" class="fig-small" style="fill:#fbf6ee">100% after</text>
+
+          <text x="18" y="108" class="fig-label">Workload concentration, Gini coefficient</text>
+          <rect x="18" y="118" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
+          <rect x="18" y="118" width="193" height="18" rx="5" fill="var(--sage)"/>
+          <text x="218" y="132" class="fig-small">0.64 before</text>
+          <rect x="18" y="142" width="300" height="18" rx="5" fill="var(--bg-alt)" stroke="var(--edge)"/>
+          <rect x="18" y="142" width="75" height="18" rx="5" fill="var(--accent)"/>
+          <text x="100" y="156" class="fig-small">0.25 after</text>
+
+          </svg>
+        <p class="fig-caption">1,343 items across 40 sprints, measured with Lorenz curves and Gini coefficients, with the computation shown so every figure could be audited.</p>
+      </div>
+      <div class="case-body">
+        <h3>Diagnosing why delivery cost what it cost, then fixing it</h3>
+        <p class="when">2024 to 2026.</p>
+        <p>I analyzed the full two-year delivery record and quantified how unevenly the work was distributed, using Lorenz curves and Gini coefficients alongside estimation coverage, defect share, and cadence variance. I presented the findings and the corrections to executive leadership with the computation shown, so every figure could be checked rather than trusted.</p>
+        <p>The delivery structure I then designed moved estimation coverage from 24 percent to 100 percent and workload concentration from 0.64 to 0.25. The same instruments now run on every sprint, and the test infrastructure I stood up from zero (unit, browser-driven end-to-end, and visual regression in one harness, with a coverage audit against a 58 area behavior catalogue) is what the numbers rest on.</p>
+        <div class="tags"><span class="tag">Delivery analytics</span><span class="tag">Lean Six Sigma Green Belt</span><span class="tag">NUnit</span><span class="tag">Selenium</span><span class="tag">Playwright</span></div>
+      </div>
+    </article>
+
+  </div>
+
+  <h2>Earlier work and credentials</h2>
+  <div class="earlier">
+    <div><b>California Secretary of State</b><span>EAM Software Consulting, 2020 to 2021</span>Front end lead. Rebuilt the voter registration flow with state staff and fixed several hundred accessibility and usability defects across screen reader behavior and navigation.</div>
+    <div><b>AthleteReg</b><span>2018 to 2020, acquired by Outside</span>Two-year mobile-first redesign of athletereg.com and its sport portals. Built the company's first style guide and component library, wrote 70+ automated visual regression and browser tests.</div>
+    <div><b>Peer-reviewed publication</b><span>ICDF2C 2017, Springer LNICST vol. 216</span>First author, "An Overview of the Usage of Default Passwords." Research assistant on an NSA-funded forensic artifact database at the University of New Haven.</div>
+    <div><b>Education</b><span>University of New Haven; Eastern Connecticut State University</span>MS Computer Science and MS Criminal Justice, both concentrated in Digital Forensics and Security. BA Sociology. CPUX-F, Lean Six Sigma Green Belt, UC Davis People Management Certificate.</div>
+  </div>
+
+  <h2 id="projects">Personal projects</h2>
+  <p class="lead">Built on my own time, live and in progress. The same instinct as the work above: write the spec, then the thing nobody knows how to write yet.</p>
 
   <div class="projects">
 
@@ -116,7 +342,7 @@
       </span>
       <span class="card-body">
         <span class="name">Foundering</span>
-        <span class="desc">A survival-horror roguelite escape from a sinking ocean liner &mdash; a real flooding sim, a wired ship of power circuits, eight classes, seven storytellers, and branching, seeded ships across 453 modeled rooms.</span>
+        <span class="desc">A survival-horror roguelite escape from a sinking ocean liner: a real flooding sim, a wired ship of power circuits, eight classes, seven storytellers, and branching, seeded ships across 453 modeled rooms.</span>
         <span class="tags"><span class="tag">Godot 4</span><span class="tag">C#</span></span>
       </span>
     </a>
@@ -127,7 +353,7 @@
       </span>
       <span class="card-body">
         <span class="name">Chronicle of Conquest</span>
-        <span class="desc">A living campaign map for your game store or gaming group &mdash; every battle reported shifts a faction's influence, and influence fades when nobody plays. Territory is never stored; it's recomputed from the log of confirmed games, which is how replay and decay work for free. The Old World, Age of Sigmar, Horus Heresy &amp; 40k.</span>
+        <span class="desc">A living campaign map for your game store or gaming group: every battle reported shifts a faction's influence, and influence fades when nobody plays. Territory is never stored; it's recomputed from the log of confirmed games, which is how replay and decay work for free. The Old World, Age of Sigmar, Horus Heresy and 40k.</span>
         <span class="tags"><span class="tag">Node.js</span><span class="tag">SQLite</span></span>
       </span>
     </a>
@@ -153,7 +379,7 @@
         </svg>
       </span>
       <span class="card-body">
-        <span class="name">TAN &mdash; True Audio Normalizer</span>
+        <span class="name">TAN, True Audio Normalizer</span>
         <span class="desc">Real-time, cross-platform audio normalization for poorly mixed sound. Works blind, with no loudness metadata and no licensed decoder. Open source, no metadata cheats.</span>
         <span class="tags"><span class="tag">Rust</span><span class="tag">WebAssembly</span></span>
       </span>
@@ -171,7 +397,7 @@
       </span>
       <span class="card-body">
         <span class="name">PRISM</span>
-        <span class="desc">A universal image format, spec written before any encoder code existed &mdash; lossless raster, a format-defined reconstruction function, and a binary vector payload. Compresses to 34% of raw, ahead of PNG and QOI.</span>
+        <span class="desc">A universal image format, spec written before any encoder code existed: lossless raster, a format-defined reconstruction function, and a binary vector payload. Compresses to 34% of raw, ahead of PNG and QOI.</span>
         <span class="tags"><span class="tag">Rust</span></span>
       </span>
     </a>
@@ -182,7 +408,7 @@
       </span>
       <span class="card-body">
         <span class="name">EverQuest Maps</span>
-        <span class="desc">Hand-drawn, vector-built parchment atlas for EverQuest Legends and Project 1999 &mdash; 79 zones, 349 points of interest, built layer by layer. Browse every map live, no install.</span>
+        <span class="desc">Hand-drawn, vector-built parchment atlas for EverQuest Legends and Project 1999: 79 zones, 349 points of interest, built layer by layer. Browse every map live, no install.</span>
         <span class="tags"><span class="tag">Vector art</span><span class="tag">79 zones</span></span>
       </span>
     </a>
@@ -205,17 +431,15 @@
       </span>
       <span class="card-body">
         <span class="name">Amber</span>
-        <span class="desc">Archived moments, browsable every revision &mdash; a visual timelapse history for your projects, alongside the git history. Headless capture, a scrub-through viewer, GIF or MP4 export.</span>
+        <span class="desc">Archived moments, browsable every revision: a visual timelapse history for your projects, alongside the git history. Headless capture, a scrub-through viewer, GIF or MP4 export.</span>
         <span class="tags"><span class="tag">Node.js</span><span class="tag">Playwright</span></span>
       </span>
     </a>
 
   </div>
 
-  <p class="lead footnote">I also do private development work for
-  UC Davis, at <a href="https://iet.ucdavis.edu/about">IET</a>.</p>
   <footer>
-    <a href="https://github.com/bknie1">github.com/bknie1</a>
+    <a href="https://github.com/bknie1">github.com/bknie1</a> &middot; <a href="mailto:brandonknieriem26@gmail.com">brandonknieriem26@gmail.com</a> &middot; Sacramento, CA, relocating.
   </footer>
 </main>
 </body>
