@@ -53,7 +53,7 @@
   /* slow dotted field behind the page */
   body::before { content: ""; position: fixed; inset: -30vh 0; z-index: -1; pointer-events: none; opacity: 0.4;
     background-image: radial-gradient(var(--grey) 1px, transparent 1.3px); background-size: 28px 28px;
-    transform: translate3d(0, calc(var(--sy) * -0.06px), 0); }
+    transform: translate3d(0, calc(var(--sy) * -0.06px), 0) scale(calc(1 + var(--sy) * 0.00009)); }
 
   /* system bar */
   .bar { background: var(--band); color: var(--on-band); font: 500 0.7rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
@@ -141,6 +141,19 @@
   .earlier div { padding: 1.1rem 1.2rem 1.2rem; font-size: 0.92rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin: 0 -1px -1px 0; }
   .earlier b { display: block; font: 800 1.05rem/1.15 var(--display); }
   .earlier span { display: block; margin: 0.35rem 0 0.55rem; font: 500 0.68rem/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+
+  /* transit: the break between the professional record and the personal work */
+  .transit { position: relative; overflow: hidden; margin-top: clamp(3rem, 7vw, 5rem); background: var(--band); color: var(--on-band); border-block: var(--rule); }
+  .transit canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .transit .wrap { position: relative; display: grid; align-content: space-between; gap: 2rem; min-height: clamp(19rem, 64vh, 34rem); padding-block: 0.9rem 1.6rem; }
+  .transit .stamp { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.3rem 1.5rem; margin: 0; font: 500 0.7rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .transit b { color: var(--band-accent); font-weight: 600; }
+  .transit .big { margin: 0 0 0 -0.05em; font: 900 clamp(2.5rem, 9vw, 7rem)/0.86 var(--display); font-stretch: 118%; letter-spacing: -0.035em; text-transform: uppercase; }
+  .transit .big span { display: block; }
+  .transit .big .l2 { color: var(--band-accent); }
+  .transit .pitch { display: inline-block; margin: 1.1rem 0 0; background: var(--on-band); color: var(--band); font: 600 0.74rem/1.2 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 0.75rem; }
+  .transit + .wrap > .sec:first-child { margin-top: clamp(2.2rem, 5vw, 3.5rem); }
+  :root[data-motion="off"] .transit .depth, html:not(.js) .transit .depth { visibility: hidden; }
 
   /* personal projects */
   .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.5rem; counter-reset: p; }
@@ -463,6 +476,21 @@
     <div><b>Education</b><span>University of New Haven; Eastern Connecticut State University</span>MS Computer Science and MS Criminal Justice, both concentrated in Digital Forensics and Security. BA Sociology. CPUX-F, Lean Six Sigma Green Belt, UC Davis People Management Certificate.</div>
   </div>
 
+</div>
+
+<div class="transit" id="transit">
+  <canvas id="transit-cv" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="stamp" aria-hidden="true"><span><b>BK-SYS</b> / Transit 03 to 04</span><span class="depth">Depth <b id="depth">00000</b></span></p>
+    <div>
+      <p class="big"><span>Edition</span><span class="l2">of one.</span></p>
+      <p class="pitch">Available 2026 / Get him while he's hot</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
   <div class="sec">
     <span class="idx" aria-hidden="true">04</span>
     <h2 id="projects">Personal projects</h2>
@@ -473,23 +501,26 @@
 
     <a class="card" href="foundering.html">
       <span class="card-banner">
-        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a ship hull with a flooded lower deck">
-          <rect x="24" y="18" width="272" height="116" rx="14" fill="var(--card)" stroke="#3a4c52" stroke-width="2"/>
-          <line x1="24" y1="56" x2="296" y2="56" stroke="var(--edge)" stroke-width="2"/>
-          <line x1="24" y1="94" x2="296" y2="94" stroke="var(--edge)" stroke-width="2"/>
-          <path d="M24 94 Q60 86 96 94 T168 94 T240 94 T296 94 V134 H24 Z" fill="#4f7a8c" opacity="0.45"/>
-          <g fill="#d99a5b">
-            <circle cx="60" cy="37" r="6"/><circle cx="100" cy="37" r="6"/><circle cx="140" cy="37" r="6"/>
-            <circle cx="180" cy="37" r="6"/><circle cx="220" cy="37" r="6"/><circle cx="260" cy="37" r="6"/>
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a listing ship hull with three decks, the lowest one flooded">
+          <polygon points="24,106 296,84 296,140 24,140" fill="var(--hot)"/>
+          <g fill="none" stroke="var(--ink)">
+            <rect x="24" y="30" width="272" height="110" stroke-width="2.5"/>
+            <path d="M24 66h272M24 103h272" stroke-width="2"/>
+            <path d="M115 30v110M206 30v110" stroke-width="1" stroke-dasharray="2 5"/>
           </g>
-          <g fill="#6b8894" opacity="0.6">
-            <circle cx="60" cy="75" r="6"/><circle cx="100" cy="75" r="6"/><circle cx="140" cy="75" r="6"/>
-            <circle cx="180" cy="75" r="6"/><circle cx="220" cy="75" r="6"/><circle cx="260" cy="75" r="6"/>
+          <g fill="var(--ink)">
+            <circle cx="50" cy="48" r="6"/><circle cx="90" cy="48" r="6"/><circle cx="140" cy="48" r="6"/>
+            <circle cx="180" cy="48" r="6"/><circle cx="231" cy="48" r="6"/><circle cx="271" cy="48" r="6"/>
           </g>
-          <g fill="#2f4750" opacity="0.75">
-            <circle cx="60" cy="113" r="6"/><circle cx="100" cy="113" r="6"/><circle cx="140" cy="113" r="6"/>
-            <circle cx="180" cy="113" r="6"/><circle cx="220" cy="113" r="6"/><circle cx="260" cy="113" r="6"/>
+          <g fill="var(--paper-2)" stroke="var(--ink)" stroke-width="2">
+            <circle cx="50" cy="84" r="5"/><circle cx="90" cy="84" r="5"/><circle cx="140" cy="84" r="5"/>
+            <circle cx="180" cy="84" r="5"/><circle cx="231" cy="84" r="5"/><circle cx="271" cy="84" r="5"/>
           </g>
+          <g fill="var(--on-hot)">
+            <circle cx="50" cy="122" r="6"/><circle cx="90" cy="122" r="6"/><circle cx="140" cy="122" r="6"/>
+            <circle cx="180" cy="122" r="6"/><circle cx="231" cy="122" r="6"/><circle cx="271" cy="122" r="6"/>
+          </g>
+          <text x="296" y="21" text-anchor="end" class="fig-small">453 ROOMS / DECK C FLOODED</text>
         </svg>
       </span>
       <span class="card-body">
@@ -513,21 +544,22 @@
     <a class="card" href="https://bknie1.github.io/True-Audio-Normalizer/">
       <span class="card-banner">
         <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Uneven audio bars on the left evening out to a normalized level on the right">
-          <line x1="20" y1="65" x2="300" y2="65" stroke="var(--edge)" stroke-width="1.5" stroke-dasharray="4 5"/>
-          <g fill="var(--muted)" opacity="0.85">
-            <rect x="30" y="100" width="16" height="30" rx="3"/>
-            <rect x="56" y="60" width="16" height="70" rx="3"/>
-            <rect x="82" y="115" width="16" height="15" rx="3"/>
-            <rect x="108" y="40" width="16" height="90" rx="3"/>
-            <rect x="134" y="90" width="16" height="40" rx="3"/>
+          <g fill="var(--ink)">
+            <rect x="24" y="102" width="10" height="30"/><rect x="40" y="58" width="10" height="74"/>
+            <rect x="56" y="114" width="10" height="18"/><rect x="72" y="38" width="10" height="94"/>
+            <rect x="88" y="88" width="10" height="44"/><rect x="104" y="70" width="10" height="62"/>
+            <rect x="120" y="120" width="10" height="12"/><rect x="136" y="48" width="10" height="84"/>
           </g>
-          <g fill="var(--accent)">
-            <rect x="174" y="65" width="16" height="65" rx="3"/>
-            <rect x="200" y="65" width="16" height="65" rx="3"/>
-            <rect x="226" y="65" width="16" height="65" rx="3"/>
-            <rect x="252" y="65" width="16" height="65" rx="3"/>
-            <rect x="278" y="65" width="16" height="65" rx="3"/>
+          <g fill="var(--hot)">
+            <rect x="174" y="68" width="10" height="64"/><rect x="190" y="68" width="10" height="64"/>
+            <rect x="206" y="68" width="10" height="64"/><rect x="222" y="68" width="10" height="64"/>
+            <rect x="238" y="68" width="10" height="64"/><rect x="254" y="68" width="10" height="64"/>
+            <rect x="270" y="68" width="10" height="64"/><rect x="286" y="68" width="10" height="64"/>
           </g>
+          <path d="M16 68h288" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <path d="M160 34v106" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+          <text x="24" y="150" class="fig-small">IN</text>
+          <text x="174" y="150" class="fig-small">OUT / LEVELLED</text>
         </svg>
       </span>
       <span class="card-body">
@@ -540,11 +572,12 @@
     <a class="card" href="https://bknie1.github.io/PRISM/">
       <span class="card-banner">
         <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A beam of light entering a prism and splitting into three colored beams">
-          <line x1="20" y1="85" x2="118" y2="85" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>
-          <polygon points="150,35 108,130 192,130" fill="var(--sage)" stroke="var(--accent-2-deep)" stroke-width="2"/>
-          <path d="M162 92 L286 55" stroke="#b34d42" stroke-width="5" stroke-linecap="round" fill="none"/>
-          <path d="M168 96 L292 96" stroke="#5c8a52" stroke-width="5" stroke-linecap="round" fill="none"/>
-          <path d="M162 100 L286 137" stroke="#4d76a3" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M16 92h120" fill="none" stroke="var(--ink)" stroke-width="6"/>
+          <polygon points="158,88 304,36 304,62" fill="var(--hot)"/>
+          <polygon points="158,90 304,72 304,98" fill="var(--ink)"/>
+          <polygon points="158,92 304,108 304,134" fill="var(--grey)"/>
+          <polygon points="150,32 102,134 198,134" fill="var(--ink)"/>
+          <text x="16" y="150" class="fig-small">34% OF RAW</text>
         </svg>
       </span>
       <span class="card-body">
@@ -568,17 +601,13 @@
     <a class="card" href="https://github.com/bknie1/Amber">
       <span class="card-banner">
         <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A drop of amber with a small frozen fern inside">
-          <defs>
-            <linearGradient id="amberGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="var(--blush)"/>
-              <stop offset="100%" stop-color="var(--accent)"/>
-            </linearGradient>
-          </defs>
-          <path d="M160 22 C198 60 222 90 222 116 C222 144 194 156 160 156 C126 156 98 144 98 116 C98 90 122 60 160 22 Z"
-                fill="url(#amberGrad)" stroke="var(--accent-2-deep)" stroke-width="1.5"/>
-          <path d="M160 132 V78 M160 100 L142 88 M160 108 L180 96 M160 118 L144 108 M160 90 L176 80"
-                stroke="var(--accent-2)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.85"/>
-          <ellipse cx="138" cy="58" rx="10" ry="18" fill="var(--card)" opacity="0.3" transform="rotate(-18 138 58)"/>
+          <path d="M16 108h288" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+          <path d="M20 108h280" fill="none" stroke="var(--ink)" stroke-width="12" stroke-dasharray="2 14"/>
+          <path d="M160 16 C196 54 220 84 220 108 C220 136 193 148 160 148 C127 148 100 136 100 108 C100 84 124 54 160 16 Z"
+                fill="var(--hot)" stroke="var(--ink)" stroke-width="2.5"/>
+          <path d="M160 130V72M160 94l-18-12M160 102l20-12M160 114l-16-10M160 84l16-10"
+                fill="none" stroke="var(--on-hot)" stroke-width="3.5"/>
+          <text x="16" y="150" class="fig-small">EVERY REVISION</text>
         </svg>
       </span>
       <span class="card-body">
@@ -617,12 +646,13 @@
   }
   themeBtn.addEventListener("click", function () {
     var t = root.getAttribute("data-theme") === "sage" ? "orange" : "sage";
-    root.setAttribute("data-theme", t); save("bk-theme", t); label();
+    root.setAttribute("data-theme", t); save("bk-theme", t); label(); bandRefresh();
   });
   motionBtn.addEventListener("click", function () {
     var m = root.getAttribute("data-motion") === "on" ? "off" : "on";
     root.setAttribute("data-motion", m); save("bk-motion", m); label();
     if (m === "off") { root.style.setProperty("--sy", 0); showAll(); } else { onScroll(); }
+    bandKick();
   });
   label();
   function motionOn() { return root.getAttribute("data-motion") === "on"; }
@@ -632,7 +662,10 @@
     ["en", "Systems / Design / Engineering"],
     ["de", "Systeme / Gestaltung / Entwicklung"],
     ["es", "Sistemas / Dise\u00f1o / Ingenier\u00eda"],
+    ["ar", "\u0627\u0644\u0623\u0646\u0638\u0645\u0629 / \u0627\u0644\u062a\u0635\u0645\u064a\u0645 / \u0627\u0644\u0647\u0646\u062f\u0633\u0629", "rtl"],
     ["fr", "Syst\u00e8mes / Design / Ing\u00e9nierie"],
+    ["zh-Hans", "\u7cfb\u7edf / \u8bbe\u8ba1 / \u5de5\u7a0b"],
+    ["vi", "H\u1ec7 th\u1ed1ng / Thi\u1ebft k\u1ebf / K\u1ef9 thu\u1eadt"],
     ["ja", "\u30b7\u30b9\u30c6\u30e0 / \u30c7\u30b6\u30a4\u30f3 / \u30a8\u30f3\u30b8\u30cb\u30a2\u30ea\u30f3\u30b0"]
   ];
   var langEl = document.getElementById("lang"), li = 0, hover = false;
@@ -644,7 +677,8 @@
     li = (li + 1) % langs.length;
     langEl.classList.add("sw");
     setTimeout(function () {
-      langEl.setAttribute("lang", langs[li][0]); langEl.textContent = langs[li][1]; langEl.classList.remove("sw");
+      langEl.setAttribute("lang", langs[li][0]); langEl.setAttribute("dir", langs[li][2] || "ltr");
+      langEl.textContent = langs[li][1]; langEl.classList.remove("sw");
     }, 230);
   }, 3000);
 
@@ -653,10 +687,72 @@
   function onScroll() {
     if (!motionOn() || ticking) return;
     ticking = true;
-    requestAnimationFrame(function () { root.style.setProperty("--sy", Math.round(window.scrollY)); ticking = false; });
+    requestAnimationFrame(function () {
+      var y = Math.round(window.scrollY);
+      root.style.setProperty("--sy", y); depthEl.textContent = ("0000" + y).slice(-5); ticking = false;
+    });
   }
+  var depthEl = document.getElementById("depth");
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  // transit band: a slow fly-through of the hero rings; time drifts it, scrolling adds depth
+  var band = document.getElementById("transit"), cv = document.getElementById("transit-cv");
+  var g = cv.getContext ? cv.getContext("2d") : null, W = 0, H = 0, lineCol = "", accCol = "";
+  var inView = false, raf = 0, drift = 0, prev = 0, STILL = 1.4;
+  function bandColors() { var s = getComputedStyle(band); lineCol = s.color; accCol = s.getPropertyValue("--band-accent").replace(/\s/g, ""); }
+  function bandSize() {
+    var r = band.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function bandZ() {
+    var r = band.getBoundingClientRect(), p = (window.innerHeight - r.top) / (window.innerHeight + r.height);
+    return drift + Math.max(0, Math.min(1, p)) * 3;
+  }
+  function bandDraw(z) {
+    var vx = W * (W < 700 ? 0.5 : 0.72), vy = H * 0.46, reach = Math.sqrt(W * W + H * H), ratio = 1.6, r0 = 5;
+    var n = Math.ceil(Math.log(reach / r0) / Math.log(ratio)) + 1, base = Math.floor(z), f = z - base, i, k, r, id, kind, a, s;
+    g.clearRect(0, 0, W, H);
+    g.save(); g.translate(vx, vy);
+    g.strokeStyle = lineCol; g.lineWidth = 1; g.globalAlpha = 0.3;
+    g.beginPath(); g.moveTo(-reach, 0); g.lineTo(reach, 0); g.moveTo(0, -reach); g.lineTo(0, reach); g.stroke();
+    g.save(); g.rotate(Math.PI / 4 + z * 0.05); g.setLineDash([1, 10]);
+    g.beginPath(); g.moveTo(-reach, 0); g.lineTo(reach, 0); g.moveTo(0, -reach); g.lineTo(0, reach); g.stroke();
+    g.restore();
+    for (i = 0; i < n; i++) {
+      k = i + f; r = r0 * Math.pow(ratio, k); id = i - base; kind = ((id % 4) + 4) % 4;
+      g.globalAlpha = Math.min(1, k / 3) * (kind === 0 ? 1 : 0.55);
+      g.strokeStyle = kind === 0 ? accCol : lineCol;
+      g.lineWidth = kind === 0 ? Math.min(1 + k * 0.45, 5) : Math.min(1 + k * 0.1, 2);
+      g.setLineDash(kind === 2 ? [3, 9] : []);
+      g.beginPath(); g.arc(0, 0, r, 0, Math.PI * 2); g.stroke();
+      if (kind === 0) {
+        a = id * 2.1 + z * 0.05; s = Math.min(3 + k * 1.7, 18);
+        g.fillStyle = accCol; g.fillRect(Math.cos(a) * r - s / 2, Math.sin(a) * r - s / 2, s, s);
+      }
+    }
+    g.restore();
+  }
+  function bandTick(now) {
+    raf = 0;
+    if (!inView || !motionOn() || document.hidden) { prev = 0; return; }
+    if (prev) drift += Math.min(now - prev, 100) * 0.00005;
+    prev = now; bandDraw(bandZ()); raf = requestAnimationFrame(bandTick);
+  }
+  function bandKick() {
+    if (!g) return;
+    if (!motionOn()) { bandDraw(STILL); return; }
+    if (!raf) { prev = 0; raf = requestAnimationFrame(bandTick); }
+  }
+  function bandRefresh() { if (!g) return; bandColors(); if (!raf) bandDraw(motionOn() ? bandZ() : STILL); }
+  if (g) {
+    bandSize(); bandRefresh();
+    if ("ResizeObserver" in window) new ResizeObserver(function () { bandSize(); bandRefresh(); }).observe(band);
+    else window.addEventListener("resize", function () { bandSize(); bandRefresh(); });
+    document.addEventListener("visibilitychange", bandKick);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { inView = es[0].isIntersecting; bandKick(); }).observe(band);
+    else { inView = true; bandKick(); }
+  }
 
   // reveals
   var items = document.querySelectorAll(".stat, .sec, .miles li, .case, .earlier, a.card");
